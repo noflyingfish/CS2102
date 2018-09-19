@@ -27,6 +27,9 @@
   </ul>
 
   <?php 
+    //show error message 
+    ini_set("display_errors", "1");
+    error_reporting(E_ALL);
     include('dbconnect.php');
 
     if(isset($_POST['signup'])){
