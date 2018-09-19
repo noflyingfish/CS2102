@@ -27,7 +27,6 @@ ini_set("display_errors", "1");
 error_reporting(E_ALL);
 
     include('dbconnect.php');
-    //if($db) echo "db connected in createuser<br/>"; //debug
 
     if(isset($_POST['submit'])){
     	$name = $_POST['name'];
