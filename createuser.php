@@ -17,15 +17,11 @@
 	<li>New Password:
 	<input type="password" name="password_1"> </li>
 	<li>Confirm Password:
-	<input type="password" name="password_2"> </li> 
+	<input type="password" name="password_2"> </li>
 	<input type="submit" value="Create New User" name="submit" >
 </form>
 
 <?php
-//show error message 
-ini_set("display_errors", "1");
-error_reporting(E_ALL);
-
     include('dbconnect.php');
 
     if(isset($_POST['submit'])){
@@ -34,7 +30,7 @@ error_reporting(E_ALL);
         $p1 = $_POST['password_1'];
     	$p2 = $_POST['password_2'];
         $check = true;
-        
+
         if ($name == "" || $email == "" || $p1 == "" || $p2 == "") {
             $check = false;
             echo "Missing user details.<br/>";
@@ -48,12 +44,12 @@ error_reporting(E_ALL);
     	$sql = "INSERT INTO users (name, email, password) VALUES('".$name."', '".$email."', '".$p1."')";
     	echo "$sql <br/>"; // for debugging
     	$add = pg_query($db, $sql);
-		
+
     	if($add) echo "add user $name successful <br/>";
         header("Location: homepage.php");
-    	} 
+    	}
         $check = true;
     }
-?>  
+?>
 </body>
 </html>

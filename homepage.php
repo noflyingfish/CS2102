@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html>
 <head>
   <title>Homepage</title>
@@ -15,21 +15,18 @@
 
       <li>Email:
       <input type="text" name ="email"> </li>
-      <li>Password: 
-      <input type="password" name ="password"> </li> 
+      <li>Password:
+      <input type="password" name ="password"> </li>
 
       <li>
       <button type="login" name="login"/> Login
       <button type="signup" name="signup" /> Sign up
       </li>
-      
+
     </form>
   </ul>
 
-  <?php 
-    //show error message 
-    ini_set("display_errors", "1");
-    error_reporting(E_ALL);
+  <?php
     include('dbconnect.php');
 
     if(isset($_POST['signup'])){
@@ -47,9 +44,9 @@
       if($count == 1) {
         echo "Logged in Successfully";
         header("Location: update.php");
-      } else 
+      } else
         echo "Wrong Password or Email";
     }
   ?>
-</body> 
+</body>
 </html>
