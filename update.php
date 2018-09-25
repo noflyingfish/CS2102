@@ -14,37 +14,73 @@
 		<li><input type="submit" name="submit" /></li>
 	</form>
 
-<?php
-//show error message 
-ini_set("display_errors", "1");
-error_reporting(E_ALL);
+	<form name="display" action="update.php" method="POST" >
+		Account Email:<input type="text" name="find_email" />
+		<input type="submit" name="submit" />
+	</form>
 
-	include('dbconnect.php');
-	$result = pg_query($db, "SELECT * FROM user");	// Query template
-	$row    = pg_fetch_row($result);		// To store the result row
-	$count = pg_query($db, "SELECT count(*) FROM user");
-	$email = $_POST['email'];
-	echo "num of data " . pg_num_rows($count) . "<br/>";
+	<?php
+		include('dbconnect.php');
 
-	if (isset($_POST['submit'])) {
-		echo "<ul><form name='update' action='update.php' method='POST'>
-		<li>New Password:</li>
-		<li><input type='text' name='new_password' value='$row[password]' /></li>
-		<li><input type='submit' name='new' /></li>
-		</form>
+		$email = $_POST['find_email'];
+		$query = "SELECT * FROM users";
+		$result = pg_query($db, $query) or die("Cannot execute query: $query\n");		// Query template
+		$row    = pg_fetch_row($result);		// To store the result row
+		$count = pg_query($db, "SELECT count(*) FROM users");
+		//if($db) echo "db connected <br>" . "num of data " . pg_num_rows($count) . "<br>" . $email . "<br>";
+
+		$count_email = pg_num_rows($results);
+
+		if (isset($_POST['submit'])) {
+
+			//below conditions checks if email is valid in database
+			if(!isset($email) || trim($email) == '') {
+				echo "<br>" . 'No email typed';
+				throw new Exception('process_z failed');
+			}
+			else if($count_email <> 1) {
+				echo "<br>" . 'Invalid email';
+				throw new Exception('process_z failed');
+			}
+
+				echo "<ul><form name='update' action='update.php' method='POST' >
+				<li>New Password:</li>
+				<li><input type='text' name='new_password' value='$row[password]' /></li>
+				<li>Retype Password:</li>
+				<li><input type='text' name='new_password2' value='$row[password]' /></li>
+				<li><input type='hidden' name='find_email' value='$email' /></li>
+				<li><input type='submit' name='new' /></li>
+			</form>
 		</ul>";
-	}
-	$password = $_POST['new_password'];
-	if (isset($_POST['new'])) {	// Submit the update SQL command
-		echo "new password input : $password <br/>"; //debugging
-		$sql = "UPDATE user SET password = '$password', WHERE email = '$email'";
-		echo "sql <br/>"; //debug
-		$result = pg_query($db, $sql);
-		if($result) {
-		echo "Update successful! <br/>";
-	}
-}
+		}
 
-?>
+		if (isset($_POST['new'])) {	// Submit the update SQL command
+			$password = $_POST['new_password'];
+			$password2 = $_POST['new_password2'];
+
+			//below conditions checks password inputs are valid
+			if($password <> $password2) {
+				echo "<br>" . 'The two passwords do not match';
+				throw new Exception('process_z failed');
+			}
+			else if(!isset($password) || trim($password) == '') {
+				echo "<br>" . 'Empty fields in input. Password not updated';
+				throw new Exception('process_z failed');
+			}
+			//echo " email: " . $email . "<br>";
+			//echo " new pass: " . $password . "<br>";
+			$sql = "UPDATE users SET password = '$password' WHERE email = '$email'";
+			//echo $sql . "<br>";
+			$result = pg_query($db, $sql);
+
+			if($result) {
+				echo 'successfully update password';
+			}
+			else {
+				echo 'Password was not updated';
+			}
+		}
+	?>
+
 </body>
 </html>
