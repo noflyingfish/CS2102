@@ -10,11 +10,6 @@
 <h2>User Profile</h2>
 
 	<form name="display" action="update.php" method="POST" >
-		<li>Account Email:<input type="text" name="email" /></li>
-		<li><input type="submit" name="submit" /></li>
-	</form>
-
-	<form name="display" action="update.php" method="POST" >
 		Account Email:<input type="text" name="find_email" />
 		<input type="submit" name="submit" />
 	</form>
