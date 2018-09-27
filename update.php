@@ -22,9 +22,9 @@
 		$result = pg_query($db, $query) or die("Cannot execute query: $query\n");		// Query template
 		$row    = pg_fetch_row($result);		// To store the result row
 		$count = pg_query($db, "SELECT count(*) FROM users");
-		//if($db) echo "db connected <br>" . "num of data " . pg_num_rows($count) . "<br>" . $email . "<br>";
+		if($db) echo "db connected <br>" . "num of data " . pg_num_rows($count) . "<br>" . $email . "<br>";
 
-		$count_email = pg_num_rows($results);
+		$count_email = pg_num_rows($result);
 
 		if (isset($_POST['submit'])) {
 
