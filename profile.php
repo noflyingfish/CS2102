@@ -24,17 +24,28 @@
 	<td>
 	<table>
 		<tr>
-			<td>1</td>
-			<td>2</td>
-		</tr>
+			<td>Name:</td>
+			<td>hardcode</td>
+		
 		<tr>
-			<td>1</td>
-			<td>2</td>
-		</tr>
+			<td>Email:</td>
+			<td>hardcode</td>
+		
 		<tr>
-			<td>1</td>
-			<td>2</td>
-		</tr>
+			<td>Number of Project</td>
+			<td>  
+				<tr>
+					<td>Owned:</td>
+					<td>hardcode</td>
+				<tr>
+					<td>Supported:</td>
+					<td>hardcode</td>
+			</td>
+
+		<tr>
+			<td>Credits:</td>
+			<td>hardcoded</td>
+
 	</table>
 	</td>
 	</table>
