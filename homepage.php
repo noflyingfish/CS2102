@@ -1,3 +1,7 @@
+<?php
+// start the session before all
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +33,16 @@
   <?php
     include('dbconnect.php');
 
+    $uemail = $_POST['email'];
+    $pw = $_POST['password'];
+    $_SESSION["user_email"] = $uemail;
+
     if(isset($_POST['signup'])){
       header("Location: createuser.php");
     }
 
     if(isset($_POST['login'])){
-      $uemail = $_POST['email'];
-      $pw = $_POST['password'];
+     
       $sql = "SELECT * FROM Users WHERE Email = '$uemail' AND Password = '$pw' LIMIT 1 ";
       $results = pg_query($db, $sql);
 
