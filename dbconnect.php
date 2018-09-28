@@ -11,7 +11,7 @@
 	$port = "5432";
 	$db_name = "CS2102";
 	$user = "postgres";
-	$password = "awzhikuan";
+	$password = "995348694";
 
 	$db = pg_pconnect("host=$server port=$port dbname=$db_name user=$user password=$password");
 	//if($db) echo "db connected in dbconnect.php <br/>";
