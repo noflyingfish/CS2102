@@ -43,7 +43,7 @@
 
       if($count == 1) {
         echo "Logged in Successfully";
-        header("Location: update.php");
+        header("Location: profile.php");
       } else
         echo "Wrong Password or Email";
     }

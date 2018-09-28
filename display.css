@@ -1,0 +1,11 @@
+.menu button{
+    display: block; /* Make the buttons appear below each other */
+}
+
+.menu button:hover{
+	background-color: #3e8e41;
+}
+
+.profile_frame{
+	width: 50%;
+}
