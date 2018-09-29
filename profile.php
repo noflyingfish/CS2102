@@ -30,7 +30,8 @@ session_start();
 		<tr>
 			<td>Name:</td>
 			<td><?php  
-					$user_email = $_SESSION["user_email"];
+					session_start();
+					$user_email = $_SESSION['user_email'];
 					$sql_email_to_name = ""; ///do sql query
 					$user_name = pg_query($db, $sql);
 					echo  $user_name ?></td>
