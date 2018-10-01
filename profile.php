@@ -20,20 +20,20 @@
 	</form>
 	</div>
 	</td>
-	
+
 	<td>
 	<table>
 		<tr>
 			<td>Name:</td>
 			<td>hardcode</td>
-		
+
 		<tr>
 			<td>Email:</td>
 			<td>hardcode</td>
-		
+
 		<tr>
 			<td>Number of Project</td>
-			<td>  
+			<td>
 				<tr>
 					<td>Owned:</td>
 					<td>hardcode</td>
@@ -53,6 +53,10 @@
 
 <?php
 	//show error message
+
+	session_start();
+	echo $_SESSION['$uemail'];
+
 	ini_set("display_errors", "1");
 	error_reporting(E_ALL);
 
@@ -68,7 +72,7 @@
 		header("Location: placeholder.php");
 	}
 	if (isset($_POST['detail'])){
-		header("Location: placeholder.php");
+		header("Location: update.php");
 	}
 	if (isset($_POST['logout'])){
 		header("Location: placeholder.php");

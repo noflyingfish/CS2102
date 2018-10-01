@@ -22,6 +22,7 @@
 	</form>
 
 	<?php
+		session_start();
 		include('dbconnect.php');
 
 		//getting variable from another php

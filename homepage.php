@@ -27,6 +27,7 @@
   </ul>
 
   <?php
+    session_start();
     include('dbconnect.php');
 
     if(isset($_POST['signup'])){
@@ -35,6 +36,7 @@
 
     if(isset($_POST['login'])){
       $uemail = $_POST['email'];
+      $_SESSION['$uemail'] = $_POST['email'];
       $pw = $_POST['password'];
       $sql = "SELECT * FROM Users WHERE Email = '$uemail' AND Password = '$pw' LIMIT 1 ";
       $results = pg_query($db, $sql);
@@ -47,6 +49,8 @@
       } else
         echo "Wrong Password or Email";
     }
+
+    //passing of variable to another php
   ?>
 </body>
 </html>
