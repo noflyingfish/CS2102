@@ -55,10 +55,6 @@ include('dbconnect.php');
 					<td>hardcode</td>
 			</td>
 
-		<tr>
-			<td>Credits:</td>
-			<td>hardcoded</td>
-
 	</table>
 	</td>
 	</table>
@@ -82,7 +78,7 @@ include('dbconnect.php');
 		header("Location: placeholder.php");
 	}
 	if (isset($_POST['view'])){
-		header("Location: placeholder.php");
+		header("Location: search.php");
 	}
 	if (isset($_POST['detail'])){
 		header("Location: update.php");
