@@ -9,24 +9,35 @@
 <h1>Crowd Funding</h1>
 <h2>User Profile</h2>
 
-	<form name="display" action="update.php" method="POST" >
+	<!--<form name="display" action="update.php" method="POST" >
 		Account Email:<input type="text" name="find_email" />
 		<input type="submit" name="submit" />
+	</form>-->
+	<form name="update" action="update.php" method="post">
+		New Password:<input type='text' name='new_password'/>
+		Retype Password:<input type='text' name='new_password2'/>
+		<!--<input type='hidden' name='find_email' value='$email' />-->
+		<input type='submit' name='new' />
 	</form>
 
 	<?php
+		//getting variable from another php
+		session_start();
 		include('dbconnect.php');
 
-		$email = $_POST['find_email'];
+		$email = $_SESSION["user_email"];
+		//$email = 'zk@123.com';
+		echo $email . '<br>';
+		//$email = $_POST['find_email'];
 		$query = "SELECT * FROM users";
 		$result = pg_query($db, $query) or die("Cannot execute query: $query\n");		// Query template
 		$row    = pg_fetch_row($result);		// To store the result row
 		$count = pg_query($db, "SELECT count(*) FROM users");
-		if($db) echo "db connected <br>" . "num of data " . pg_num_rows($count) . "<br>" . $email . "<br>";
+		//if($db) echo "num of data " . pg_num_rows($count) . "<br>" . $email . "<br>";
 
 		$count_email = pg_num_rows($result);
 
-		if (isset($_POST['submit'])) {
+	/*	if (isset($_POST['submit'])) {
 
 			//below conditions checks if email is valid in database
 			if(!isset($email) || trim($email) == '') {
@@ -47,7 +58,7 @@
 				<li><input type='submit' name='new' /></li>
 			</form>
 		</ul>";
-		}
+		}*/
 
 		if (isset($_POST['new'])) {	// Submit the update SQL command
 			$password = $_POST['new_password'];
