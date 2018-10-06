@@ -3,6 +3,7 @@
 <head>
 	<title>Search</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="display.css"/>
 </head>
 <body>
 
@@ -13,6 +14,8 @@
 	<li>Enter search here:
 	<input type="text" name ="query"> </li>
 	<input type="submit" value="search" name="search_btn" >
+	&nbsp
+	<input type="submit" value="back" name="back_btn" >
 </form>
 
 <?php
@@ -60,7 +63,8 @@
             while ($y < $count)
             {
                 $c_row = current($row);
-                echo "<td>  " . $c_row . "  </td>";
+                echo "<td>  " . $c_row . " &nbsp &nbsp &nbsp &nbsp &nbsp </td>";
+                
                 next($row);
                 $y = $y + 1;
             }
@@ -74,6 +78,10 @@
     	
     	if($result) echo "Search results for $q returned <br/>";
         $check = true;
+    }
+    
+    if(isset($_POST['back_btn'])){
+         header("Location: profile.php");
     }
 ?>
 </body>
