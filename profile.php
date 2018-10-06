@@ -32,8 +32,12 @@ include('dbconnect.php');
 			<td>Name:</td>
 			
 			<td><?php
-
+                    
 					$user_email = $_SESSION["user_email"];
+					if ($user_email == ""){
+                        echo "Not logged in. Redirect";
+                         header("Location: homepage.php");
+					}
 					$sql = "SELECT * FROM users WHERE email = '$user_email'"; ///do sql query
 					$result = pg_query($db, $sql);
 					$row = pg_fetch_assoc($result);
@@ -98,7 +102,9 @@ include('dbconnect.php');
 		header("Location: update.php");
 	}
 	if (isset($_POST['logout'])){
-		header("Location: placeholder.php");
+		session_start();
+        unset($_SESSION["user_email"]); 
+        header("Location: homepage.php");
 	}
 
 ?>
