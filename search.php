@@ -49,7 +49,7 @@
         while ($i < pg_num_fields($result))
         {
             $fieldName = pg_field_name($result, $i);
-            echo "<td>  " . $fieldName . "  </td>";
+            echo "<td>  " . $fieldName . " </td>";
             $i = $i + 1;
         }
         echo "</tr>";
@@ -62,8 +62,17 @@
             $y = 0;
             while ($y < $count)
             {
+                
                 $c_row = current($row);
-                echo "<td>  " . $c_row . " &nbsp &nbsp &nbsp &nbsp &nbsp </td>";
+                   
+                   
+                   if ($y % 4 == 0 && $y != 0){
+                      echo "<td> " . $c_row . " &nbsp <button type = ".button.">Support</button> </td>";
+         
+                }else{
+                       echo "<td> " . $c_row . " &nbsp </td>";
+                }
+                
                 
                 next($row);
                 $y = $y + 1;
@@ -72,7 +81,6 @@
             $i = $i + 1;
         }
         pg_free_result($result);
-
         echo "</table></body></html>";
     	
     	
