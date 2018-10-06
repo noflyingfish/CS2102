@@ -63,8 +63,7 @@ include('dbconnect.php');
 <?php
 	//show error message
 
-	session_start();
-	echo $_SESSION['$uemail'];
+	echo "$user_email";
 
 	ini_set("display_errors", "1");
 	error_reporting(E_ALL);
