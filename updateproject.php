@@ -13,63 +13,47 @@
   <!--display project id and title-->
 
 	<form name="display" action="updateproject.php" method="POST" >
-		title:<input type="text" name="new_title" />
-    description:<input type="text" name="new_description" />
-    Amount seeking ($):<input type="text" name="new_amt" />
-    End date:<input type="text" name="new_date" />
-    Project keywords:<input type="text" name="new_keyword" />
+		title:<input type="text" name="new_title" value='$row[title]'/>
+    description:<input type="text" name="new_description" value='$row[description]'/>
+    Amount seeking ($):<input type="text" name="new_amt" value='$row[total$]'/>
+    End date:<input type="text" name="new_date" value='$row[end_date]'/>
+    Project keywords:<input type="text" name="new_keyword" value='$row[project_keywords]'/>
 		<input type="submit" name="submit" />
 	</form>
 
 	<?php
+		//getting variable from another php
 		session_start();
 		include('dbconnect.php');
-
-		//getting variable from another php
-	  //session_start();
-		//$_SESSION['$project'];
+/*
+		echo "<ul><form name='display' action='updateproject.php' method='POST' >
+			<li>title:</li>
+			<li><input type='text' name='new_title' value='$row[title]' /></li>
+	    <li>description:</li>
+			<li><input type='text' name='new_description' value='$row[description]' /></li>
+	    <li>Amount seeking ($):</li>
+			<li><input type='int' name='new_amt' value='$row[total$]' /></li>
+	    <li>End date:</li>
+			<li><input type='date' name='new_date' value='$row[end_date]' /></li>
+	    <li>Project keywords:</li>
+			<li><input type='text' name='new_keyword' value='$row[project_keywords]' /></li>
+			<li><input type='submit' name='submit' /></li>
+		</form>
+		</ul>"; */
 
 		//get project row from view projects
-    $project = <add in project row here>;
+    //$project = $_SESSION['$project'];
 		//or die("Cannot execute query: $query\n");
-		if($db) echo "db connected <br>" . $project . "<br>";
+		//if($db) echo "db connected <br>" . $project . "<br>";
 
     //validate the input data
-		if (isset($_POST['submit'])) {
-
-			if(!isset($email) || trim($email) == '') {
-				echo "<br>" . 'No email typed';
-				throw new Exception('process_z failed');
-			}
-			else if($count_email <> 1) {
-				echo "<br>" . 'Invalid email';
-				throw new Exception('process_z failed');
-			}
-
-				echo "<ul><form name='update' action='updateproject.php' method='POST' >
-				<li>title:</li>
-				<li><input type='text' name='new_title' value='$row[title]' /></li>
-				<li>description:</li>
-				<li><input type='text' name='new_description' value='$row[description]' /></li>
-        <li>Amount seeking ($):</li>
-        <li><input type='text' name='new_amt' value='$row[total$]' /></li>
-        <li>End date:</li>
-        <li><input type='text' name='new_date' value='$row[end_date]' /></li>
-        <li>Project keywords:</li>
-        <li><input type='text' name='new_keyword' value='$row[project_keywords]' /></li>
-				<li><input type='hidden' name='find_email' value='$email' /></li>
-				<li><input type='submit' name='new' /></li>
-			</form>
-		</ul>";
-		}
-
-		if (isset($_POST['new'])) {	// Submit the update SQL command
+		if (isset($_POST['submit'])) {	// Submit the update SQL command
 			$title = $_POST['new_title'];
 			$description = $_POST['new_description'];
       $amt = $_POST['new_amt'];
       $end_date = $_POST['new_date'];
       $keywords = $_POST['new_keyword'];
-      $curr$ = <input current amount from query>;
+      //$curr$ = <input current amount from query>;
 
 			//below conditions checks all fills are filled
       if(count(array_filter($_POST))!=count($_POST)){

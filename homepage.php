@@ -1,7 +1,3 @@
-<?php
-// start the session before all
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +39,7 @@ session_start();
     }
 
     if(isset($_POST['login'])){
-     
+
       $sql = "SELECT * FROM Users WHERE Email = '$uemail' AND Password = '$pw' LIMIT 1 ";
       $results = pg_query($db, $sql);
 

@@ -7,10 +7,10 @@ include('dbconnect.php');
 <html>
 <head>
 	<title>Profile Page</title>
-	<link rel="stylesheet" type="text/css" href="display.css">
+	<link rel="stylesheet" type="text/css" href="display.css"/>
 </head>
 <body>
-
+<img src="https://otakukart.com/animeblog/wp-content/uploads/2017/07/IMG_20170722_002031.jpg" alt="Background" style="float:left;width:300px;height:100px;">
 	<h1>Crowd Funding</h1>
 	<h2>Profile page</h2>
 <table class="profile_frame">
@@ -30,9 +30,14 @@ include('dbconnect.php');
 	<table>
 		<tr>
 			<td>Name:</td>
+			
 			<td><?php
-
+                    
 					$user_email = $_SESSION["user_email"];
+					if ($user_email == ""){
+                        echo "Not logged in. Redirect";
+                         header("Location: homepage.php");
+					}
 					$sql = "SELECT * FROM users WHERE email = '$user_email'"; ///do sql query
 					$result = pg_query($db, $sql);
 					$row = pg_fetch_assoc($result);
@@ -45,19 +50,29 @@ include('dbconnect.php');
 					echo "$user_email";
 					?></td>
 		<tr>
-			<td>Number of Project</td>
+			<td>Project Count</td>
 			<td>
 				<tr>
 					<td>Owned:</td>
-					<td>hardcode</td>
+					<td><?php 
+                        $sql = "SELECT COUNT(*) as owned FROM own WHERE email = '$user_email'";
+                        $result = pg_query($db, $sql);
+                        $row = pg_fetch_assoc($result);
+                        $count = $row['owned'];
+                        echo "$count";
+                        
+					?></td>
 				<tr>
 					<td>Supported:</td>
-					<td>hardcode</td>
+					<td><?php 
+                        $sql = "SELECT COUNT(*) as supported FROM support WHERE email = '$user_email'";
+                        $result = pg_query($db, $sql);
+                        $row = pg_fetch_assoc($result);
+                        $count = $row['supported'];
+                        echo "$count";
+                        
+					?></td>
 			</td>
-
-		<tr>
-			<td>Credits:</td>
-			<td>hardcoded</td>
 
 	</table>
 	</td>
@@ -67,8 +82,7 @@ include('dbconnect.php');
 <?php
 	//show error message
 
-	session_start();
-	echo $_SESSION['$uemail'];
+	//echo "$user_email";
 
 	ini_set("display_errors", "1");
 	error_reporting(E_ALL);
@@ -82,13 +96,15 @@ include('dbconnect.php');
 		header("Location: placeholder.php");
 	}
 	if (isset($_POST['view'])){
-		header("Location: placeholder.php");
+		header("Location: search.php");
 	}
 	if (isset($_POST['detail'])){
 		header("Location: update.php");
 	}
 	if (isset($_POST['logout'])){
-		header("Location: placeholder.php");
+		session_start();
+        unset($_SESSION["user_email"]); 
+        header("Location: homepage.php");
 	}
 
 ?>

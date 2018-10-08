@@ -3,6 +3,7 @@
 <head>
 	<title>Search</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="display.css"/>
 </head>
 <body>
 
@@ -13,6 +14,8 @@
 	<li>Enter search here:
 	<input type="text" name ="query"> </li>
 	<input type="submit" value="search" name="search_btn" >
+	&nbsp
+	<input type="submit" value="back" name="back_btn" >
 </form>
 
 <?php
@@ -46,7 +49,7 @@
         while ($i < pg_num_fields($result))
         {
             $fieldName = pg_field_name($result, $i);
-            echo "<td>  " . $fieldName . "  </td>";
+            echo "<td>  " . $fieldName . " </td>";
             $i = $i + 1;
         }
         echo "</tr>";
@@ -59,8 +62,18 @@
             $y = 0;
             while ($y < $count)
             {
+                
                 $c_row = current($row);
-                echo "<td>  " . $c_row . "  </td>";
+                   
+                   
+                   if ($y % 4 == 0 && $y != 0){
+                      echo "<td> " . $c_row . " &nbsp <button type = ".button.">Support</button> </td>";
+         
+                }else{
+                       echo "<td> " . $c_row . " &nbsp </td>";
+                }
+                
+                
                 next($row);
                 $y = $y + 1;
             }
@@ -68,12 +81,15 @@
             $i = $i + 1;
         }
         pg_free_result($result);
-
         echo "</table></body></html>";
     	
     	
     	if($result) echo "Search results for $q returned <br/>";
         $check = true;
+    }
+    
+    if(isset($_POST['back_btn'])){
+         header("Location: profile.php");
     }
 ?>
 </body>
