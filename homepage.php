@@ -30,9 +30,14 @@
     session_start();
     include('dbconnect.php');
 
-    $uemail = $_POST['email'];
-    $pw = $_POST['password'];
-    $_SESSION["user_email"] = $uemail;
+    if(isset($_POST['email'])){
+      $uemail = $_POST['email'];
+      $_SESSION["user_email"] = $uemail;
+    }
+    
+    if(isset($_POST['password'])){
+      $pw = $_POST['password'];
+    }
 
     if(isset($_POST['signup'])){
       header("Location: createuser.php");
