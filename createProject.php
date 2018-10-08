@@ -49,11 +49,24 @@
           $curr = $_POST['name'];
           $keywords = $_POST['name']; 
           $create = true;
+         
+          //Validation for blank info
+          if ($title == "" || $startDate == "" || $endDate == "" || $target == "" || $curr == "" || $keywords == "" || $description == "") {
+            $create = false;
+            echo "Please ensure all details are filled";
+          }
 
-          
+          //Add to database
+          if($create) {
+            $sql = "INSERT INTO projects (title, description, startDate, endDate, curr, target, keywords) VALUES('" .$title."', '".$description."', '".$startDate."', '".$endDate."', '".$target."', '".$curr."', '".$keywords."')";
+            echo " $sql <br/>" ; //debugging
+            $add = pg_query($db,$sql);
+            if($add){
+            echo "Project $title has been successfully created"; 
+            }
+          }
+          $create = true; //to reset          
         }
-
-        
 ?>
 
 </head>
