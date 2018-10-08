@@ -10,8 +10,7 @@ include('dbconnect.php');
 	<link rel="stylesheet" type="text/css" href="display.css"/>
 </head>
 <body>
-<img src="https://otakukart.com/animeblog/wp-content/uploads/2017/07/IMG_20170722_002031.jpg" alt="Background" style="float:left;width:300px;height:100px;">
-	<h1>Crowd Funding</h1>
+<img src="banner.jpg">
 	<h2>Profile page</h2>
 <table class="profile_frame">
 	<td>

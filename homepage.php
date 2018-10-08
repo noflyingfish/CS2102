@@ -7,12 +7,11 @@
 </head>
 <body>
 
-  <h1>Crowd Funding</h1>
+  <img src="banner.jpg">
   <h2>Welcome</h2>
 
-  <ul>
-    <form name="display" method="POST" >
-
+  <ul> 
+    <form name="display" method="POST">
       <li>Email:
       <input type="text" name ="email"> </li>
       <li>Password:
@@ -22,8 +21,8 @@
       <button type="login" name="login"/> Login
       <button type="signup" name="signup" /> Sign up
       </li>
-
     </form>
+
   </ul>
 
   <?php
@@ -34,7 +33,7 @@
       $uemail = $_POST['email'];
       $_SESSION["user_email"] = $uemail;
     }
-    
+
     if(isset($_POST['password'])){
       $pw = $_POST['password'];
     }
