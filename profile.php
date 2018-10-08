@@ -90,7 +90,7 @@ include('dbconnect.php');
     include('dbconnect.php');
 
 	if (isset($_POST['profile'])){
-		header("Location: placeholder.php");
+		header("Location: profile.php");
 	}
 	if (isset($_POST['create'])){
 		header("Location: placeholder.php");
