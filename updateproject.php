@@ -19,6 +19,8 @@
     End date:<input type="text" name="new_date" value='$row[end_date]'/>
     Project keywords:<input type="text" name="new_keyword" value='$row[project_keywords]'/>
 		<input type="submit" name="submit" />
+		<br>
+		<input type="submit" value="go back to projects" name="back_btn" >
 	</form>
 
 	<?php
@@ -42,7 +44,8 @@
 		</ul>"; */
 
 		//get project row from view projects
-    //$project = $_SESSION['$project'];
+    $project = $_SESSION("project");
+		echo $project;
 		//or die("Cannot execute query: $query\n");
 		//if($db) echo "db connected <br>" . $project . "<br>";
 
@@ -83,6 +86,10 @@
 				echo 'Project was not updated.';
 			}
 		}
+
+		if(isset($_POST['back_btn'])){
+         header("Location: view.php");
+    }
 	?>
 
 </body>

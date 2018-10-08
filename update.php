@@ -17,7 +17,10 @@
 		New Password:<input type='text' name='new_password'/>
 		Retype Password:<input type='text' name='new_password2'/>
 		<!--<input type='hidden' name='find_email' value='$email' />-->
+		<br>
 		<input type='submit' name='new' />
+		
+		<input type="submit" value="go back to profile" name="back_btn" >
 	</form>
 
 	<?php
@@ -27,7 +30,7 @@
 
 		$email = $_SESSION["user_email"];
 		//$email = 'zk@123.com';
-		echo $email . '<br>';
+		//echo $email . '<br>';
 		//$email = $_POST['find_email'];
 		$query = "SELECT * FROM users";
 		$result = pg_query($db, $query) or die("Cannot execute query: $query\n");		// Query template
@@ -59,6 +62,9 @@
 			</form>
 		</ul>";
 		}*/
+		if(isset($_POST['back_btn'])){
+         header("Location: profile.php");
+    }
 
 		if (isset($_POST['new'])) {	// Submit the update SQL command
 			$password = $_POST['new_password'];
