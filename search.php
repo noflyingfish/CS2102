@@ -67,7 +67,7 @@
 
 
                    if ($y % 4 == 0 && $y != 0){
-                      echo "<td> " . $c_row . " &nbsp <button type = ".button.">Support</button> </td>";
+                      echo "<td> " . $c_row . " &nbsp <button>Support</button> </td>";
 
                 }else{
                        echo "<td> " . $c_row . " &nbsp </td>";
