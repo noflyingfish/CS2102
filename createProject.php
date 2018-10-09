@@ -58,7 +58,7 @@
 
           //Add to database
           if($create) {
-            $sql = "INSERT INTO projects (title, description, startDate, endDate, curr, target, keywords) VALUES('" .$title."', '".$description."', '".$startDate."', '".$endDate."', '".$target."', '".$curr."', '".$keywords."')";
+            $sql = "INSERT INTO projects (curr$, total$, title, description, project_keywords, start_date, end_date) VALUES('" .$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."')";
             echo " $sql <br/>" ; //debugging
             $add = pg_query($db,$sql);
             if($add){
