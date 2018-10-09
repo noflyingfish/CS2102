@@ -1,7 +1,6 @@
 
-
  body {
-    background-color: powderblue;
+    background-color: white;
 }
 h1 {
     color: red;
@@ -14,7 +13,7 @@ p {
 }
 
 .menu button:hover{
-	background-color: #000000;
+	background-color: #c9ddff;
 }
 
 .profile_frame{
