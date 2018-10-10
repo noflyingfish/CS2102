@@ -16,10 +16,10 @@ include('dbconnect.php');
 	<td>
 	<div class="menu">
 	<form method="POST" >
-	  <button name="profile">Profile</button>
 	  <button name="create">Create Project</button>
-	  <button name="view">View Project</button>
-	  <button name="detail">User Details</button>
+	  <button name="mod">Moderate Projects</button>
+	  <button name="moduser">Moderate Users</button>
+	  <button name="detail">Admin Details</button>
 	  <button name="logout">Log Out</button>
 	</form>
 	</div>
@@ -31,7 +31,7 @@ include('dbconnect.php');
 			<td>Name:</td>
 			
 			<td><?php
-                    
+                    $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
 					$user_email = $_SESSION["user_email"];
 					if ($user_email == ""){
                         echo "Not logged in. Redirect";
@@ -49,28 +49,7 @@ include('dbconnect.php');
 					echo "$user_email";
 					?></td>
 		<tr>
-			<td>Project Count</td>
-			<td>
-				<tr>
-					<td>Owned:</td>
-					<td><?php 
-                        $sql = "SELECT COUNT(*) as owned FROM own WHERE email = '$user_email'";
-                        $result = pg_query($db, $sql);
-                        $row = pg_fetch_assoc($result);
-                        $count = $row['owned'];
-                        echo "$count";
-                        
-					?></td>
-				<tr>
-					<td>Supported:</td>
-					<td><?php 
-                        $sql = "SELECT COUNT(*) as supported FROM support WHERE email = '$user_email'";
-                        $result = pg_query($db, $sql);
-                        $row = pg_fetch_assoc($result);
-                        $count = $row['supported'];
-                        echo "$count";
-                        
-					?></td>
+			
 			</td>
 
 	</table>
@@ -88,21 +67,23 @@ include('dbconnect.php');
 
     include('dbconnect.php');
 
-	if (isset($_POST['profile'])){
-		header("Location: profile.php");
+	
+	if (isset($_POST['mod'])){
+		header("Location: moderate.php");  //admin will search for project and get project id. Will key in project id and then edit the details respectively.
 	}
 	if (isset($_POST['create'])){
-		header("Location: createProject.php");
-	}
-	if (isset($_POST['view'])){
-		header("Location: search.php");
+		header("Location: createProject.php");  //let admin create a project normally. check for mod status on createProject.php using session var, then give additional powers. Also reroute the back button to admin page instead of normal user page by using session var.
 	}
 	if (isset($_POST['detail'])){
-		header("Location: update.php");
+		//header("Location: update.php");   //NEED TO EDIT UPDATE.PHP to let admin chage pw. W/A: Don't let mod update details yet.
+	}
+	if (isset($_POST['moduser'])){
+		header("Location: moderateuser.php");   
 	}
 	if (isset($_POST['logout'])){
 		session_start();
         unset($_SESSION["user_email"]); 
+        unset($_SESSION["mod"]);
         header("Location: homepage.php");
 	}
 
