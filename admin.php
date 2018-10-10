@@ -29,13 +29,13 @@ include('dbconnect.php');
 	<table>
 		<tr>
 			<td>Name:</td>
-			
+
 			<td><?php
-                    $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
-					$user_email = $_SESSION["user_email"];
+          $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
+					$user_email = $_SESSION["admin_email"];
 					if ($user_email == ""){
                         echo "Not logged in. Redirect";
-                         header("Location: homepage.php");
+                        header("Location: homepage.php");
 					}
 					$sql = "SELECT * FROM admin WHERE email = '$user_email'"; ///do sql query
 					$result = pg_query($db, $sql);
@@ -49,7 +49,7 @@ include('dbconnect.php');
 					echo "$user_email";
 					?></td>
 		<tr>
-			
+
 			</td>
 
 	</table>
@@ -67,7 +67,7 @@ include('dbconnect.php');
 
     include('dbconnect.php');
 
-	
+
 	if (isset($_POST['mod'])){
 		header("Location: moderate.php");  //admin will search for project and get project id. Will key in project id and then edit the details respectively.
 	}
@@ -78,11 +78,11 @@ include('dbconnect.php');
 		//header("Location: update.php");   //NEED TO EDIT UPDATE.PHP to let admin chage pw. W/A: Don't let mod update details yet.
 	}
 	if (isset($_POST['moduser'])){
-		header("Location: moderateuser.php");   
+		header("Location: moderateuser.php");
 	}
 	if (isset($_POST['logout'])){
 		session_start();
-        unset($_SESSION["user_email"]); 
+        unset($_SESSION["admin_email"]);
         unset($_SESSION["mod"]);
         header("Location: homepage.php");
 	}

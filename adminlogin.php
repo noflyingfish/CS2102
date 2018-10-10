@@ -19,7 +19,8 @@
 
       <li>
       <button type="login" name="login"/> Login
-      <button type="signup" name="userlogin" /> Back to User Login
+      &nbsp
+      <button type="signup" name="userlogin" /> Back to Normal User Login
       </li>
     </form>
 
@@ -31,7 +32,7 @@
 
     if(isset($_POST['email'])){
       $uemail = $_POST['email'];
-      $_SESSION["user_email"] = $uemail;
+      $_SESSION["admin_email"] = $uemail;
     }
 
     if(isset($_POST['password'])){
