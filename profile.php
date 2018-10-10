@@ -11,7 +11,8 @@ include('dbconnect.php');
 </head>
 <body>
 <img src="banner.jpg">
-	<h2>Profile page</h2>
+	<h2>Profile Page</h2>
+	
 <table class="profile_frame">
 	<td>
 	<div class="menu">
