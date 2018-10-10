@@ -29,9 +29,9 @@ include('dbconnect.php');
 	<table>
 		<tr>
 			<td>Name:</td>
-			
+
 			<td><?php
-                    
+
 					$user_email = $_SESSION["user_email"];
 					if ($user_email == ""){
                         echo "Not logged in. Redirect";
@@ -53,23 +53,23 @@ include('dbconnect.php');
 			<td>
 				<tr>
 					<td>Owned:</td>
-					<td><?php 
+					<td><?php
                         $sql = "SELECT COUNT(*) as owned FROM own WHERE email = '$user_email'";
                         $result = pg_query($db, $sql);
                         $row = pg_fetch_assoc($result);
                         $count = $row['owned'];
                         echo "$count";
-                        
+
 					?></td>
 				<tr>
 					<td>Supported:</td>
-					<td><?php 
+					<td><?php
                         $sql = "SELECT COUNT(*) as supported FROM support WHERE email = '$user_email'";
                         $result = pg_query($db, $sql);
                         $row = pg_fetch_assoc($result);
                         $count = $row['supported'];
                         echo "$count";
-                        
+
 					?></td>
 			</td>
 
@@ -92,7 +92,7 @@ include('dbconnect.php');
 		header("Location: profile.php");
 	}
 	if (isset($_POST['create'])){
-		header("Location: placeholder.php");
+		header("Location: createProject.php");
 	}
 	if (isset($_POST['view'])){
 		header("Location: search.php");
@@ -102,7 +102,7 @@ include('dbconnect.php');
 	}
 	if (isset($_POST['logout'])){
 		session_start();
-        unset($_SESSION["user_email"]); 
+        unset($_SESSION["user_email"]);
         header("Location: homepage.php");
 	}
 
