@@ -1,5 +1,4 @@
-
- body {
+body {
     background-color: white;
 }
 h1 {
@@ -10,7 +9,16 @@ p {
 }
 .menu button{
     display: block; /* Make the buttons appear below each other */
+    width: 35%;
+    margin: 2%;
 }
+
+.menu input{
+    display: block; /* Make the buttons appear below each other */
+    width: 35%;
+    margin: 2%;
+}
+
 
 .menu button:hover{
 	background-color: #c9ddff;

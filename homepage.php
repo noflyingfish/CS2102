@@ -51,10 +51,6 @@
       $is_admin = pg_query($db, $sql_admin);
       $count_admin = pg_num_rows($is_admin);// 1 if exist
 
-      //debug
-      echo "$count_user <br/>";
-      echo "$count_admin <br/>";
-
       if($count_user == 1) {
         echo "Logged in Successfully";
         header("Location: profile.php");
