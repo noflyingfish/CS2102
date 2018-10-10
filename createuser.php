@@ -38,10 +38,15 @@
             echo "Password and confirm password does not match.<br/>";
         }
 
-        $sql_check_user_exist = "SELECT COUNT(*) FROM users where email = '$email'";
-        $sql_check_admin_exist = "SELECT COUNT(*) FROM admin where email = '$email'";
-        $user_exist = pg_query($db, $sql_check_user_exist);
-        $admin_exist = pg_query($db, $sql_check_admin_exist);
+        $sql_check_user_exist = "SELECT * FROM users where email = '$email'";
+        $user_result = pg_query($db, $sql_check_user_exist);
+        $user_exist = pg_num_rows($user_result);
+
+        $sql_check_admin_exist = "SELECT * FROM admin where email = '$email'";
+        $admin_result = pg_query($db, $sql_check_admin_exist);
+        $admin_exist = pg_num_rows($admin_result);
+        ;
+
         if($user_exist != 0 || $admin_exist != 0){
             $check = false;
             echo "Email account already registered. <br/>";

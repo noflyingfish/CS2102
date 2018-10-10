@@ -38,17 +38,13 @@
 
     if(isset($_POST['login'])){
 
-      $sql_user = "SELECT COUNT(*) FROM users WHERE email = '$uemail' AND password = '$pw'";
+      $sql_user = "SELECT * FROM users WHERE email = '$uemail' AND password = '$pw'";
       $is_user = pg_query($db, $sql_user); 
       $count_user = pg_num_rows($is_user);// 1 if exist. 
 
-      $sql_admin = "SELECT COUNT(*) FROM admin WHERE email = '$uemail' AND password = '$pw'";
+      $sql_admin = "SELECT * FROM admin WHERE email = '$uemail' AND password = '$pw'";
       $is_admin = pg_query($db, $sql_admin); 
       $count_admin = pg_num_rows($is_admin);// 1 if exist 
-
-      //debug
-      echo "$count_user <br/>";
-      echo "$count_admin <br/>";
 
       if($count_user == 1) {
         echo "Logged in Successfully";
