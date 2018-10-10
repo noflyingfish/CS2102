@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Create Project</title>
+  <link rel="stylesheet" type="text/css" href="display.css"/>
   <style>li {list-style: none;}</style>
     </head>
     <body>
@@ -30,8 +30,8 @@
   <li>Keywords for search (separate by comma e.g a,b,c):
   <input type="text" name="keywords"> </li>
 
-	<input type="submit" value="create project" name="submit" >
-	<input type="submit" value="go back to profile" name="back_btn" >
+	<input type="submit" value="Create Project" name="submit" >
+	<input type="submit" value="Back to Profile" name="back_btn" >
 </form>
 
 
@@ -41,6 +41,8 @@
 		//getting variable from another php
 		session_start();
         include('dbconnect.php');
+        $user_email = $_SESSION["user_email"];
+
         if(isset($_POST['submit'])){
           $title = $_POST['title'];
           $description = $_POST['description'];
@@ -60,11 +62,18 @@
 
           //Add to database
           if($create) {
-            $sql = "INSERT INTO project (curr$, total$, title, description, project_keywords, start_date, end_date) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."')";
-            //echo " $sql <br/>" ; //debugging
-            $add = pg_query($db,$sql);
-            if($add){
-            echo "Project $title has been successfully created"; 
+            $sql_project = "INSERT INTO project (curr$, total$, title, description, project_keywords, start_date, end_date) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."')";
+            $add_project = pg_query($db,$sql_project);
+            
+            $new_project = pg_fetch_array($result);
+            $new_project_id = $new_project[0];
+
+            $sql_own = "INSERT INTO own VALUES(".$new_project_id.",'$user_email')";
+            echo "$sql_own <br/>";
+            //$add_own = pg_query($db, $sql_own);
+            
+            if($add_project){
+                echo "Project $title has been successfully created"; 
             }else {
                 echo "failed";    //debug
             }

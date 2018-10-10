@@ -11,7 +11,8 @@ include('dbconnect.php');
 </head>
 <body>
 <img src="banner.jpg">
-	<h2>Profile page</h2>
+	<h2>Profile Page</h2>
+	
 <table class="profile_frame">
 	<td>
 	<div class="menu">
@@ -92,7 +93,7 @@ include('dbconnect.php');
 		header("Location: profile.php");
 	}
 	if (isset($_POST['create'])){
-		header("Location: placeholder.php");
+		header("Location: createProject.php");
 	}
 	if (isset($_POST['view'])){
 		header("Location: search.php");
