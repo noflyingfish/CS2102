@@ -26,7 +26,6 @@
                  header("Location: homepage.php");
           }
           
-          
           include('dbconnect.php');
           
 if(isset($_POST['search_btn'])){
