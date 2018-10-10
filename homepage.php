@@ -3,28 +3,21 @@
 <head>
   <title>Homepage</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <style>li {list-style: none;}</style>
+  <link rel="stylesheet" type="text/css" href="display.css"/>
 </head>
 <body>
 
   <img src="banner.jpg">
   <h2>Welcome</h2>
-  
-  <ul> 
-    <form name="display" method="POST">
-      <li>Email:
-      <input type="text" name ="email"> </li>
-      <li>Password:
-      <input type="password" name ="password"> </li>
-
-      <li>
-      <button type="login" name="login"/> Login
-      <button type="signup" name="signup" /> Sign up
-      <button type="admin" name="admin" /> Admin Login
-      </li>
+    
+    <div class="menu">
+    <form name="display" method="POST"> 
+      <input type="text" name ="email" placeholder ="Email"> 
+      <input type="password" name ="password" placeholder ="Password">
+      <button type="login" name="login"> Login
+      <button type="signup" name="signup"> Sign up
     </form>
-
-  </ul>
+    </div>
 
   <?php
     session_start();
@@ -42,26 +35,31 @@
     if(isset($_POST['signup'])){
       header("Location: createuser.php");
     }
-    
-      if(isset($_POST['admin'])){
-      header("Location: adminlogin.php");
-    }
 
     if(isset($_POST['login'])){
 
-      $sql = "SELECT * FROM Users WHERE Email = '$uemail' AND Password = '$pw' LIMIT 1 ";
-      $results = pg_query($db, $sql);
+      $sql_user = "SELECT COUNT(*) FROM users WHERE email = '$uemail' AND password = '$pw'";
+      $is_user = pg_query($db, $sql_user); 
+      $count_user = pg_num_rows($is_user);// 1 if exist. 
 
-      $count = pg_num_rows($results);
+      $sql_admin = "SELECT COUNT(*) FROM admin WHERE email = '$uemail' AND password = '$pw'";
+      $is_admin = pg_query($db, $sql_admin); 
+      $count_admin = pg_num_rows($is_admin);// 1 if exist 
 
-      if($count == 1) {
+      //debug
+      echo "$count_user <br/>";
+      echo "$count_admin <br/>";
+
+      if($count_user == 1) {
         echo "Logged in Successfully";
         header("Location: profile.php");
-      } else
+      }else if($count_admin == 1){
+        echo "Logged in Successfully";
+        header("Location: admin.php");
+      }else{
         echo "Wrong Password or Email";
+      }
     }
-
-    //passing of variable to another php
   ?>
 </body>
 </html>

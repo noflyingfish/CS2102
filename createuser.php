@@ -37,12 +37,22 @@
             $check = false;
             echo "Password and confirm password does not match.<br/>";
         }
+
+        $sql_check_user_exist = "SELECT COUNT(*) FROM users where email = '$email'";
+        $sql_check_admin_exist = "SELECT COUNT(*) FROM admin where email = '$email'";
+        $user_exist = pg_query($db, $sql_check_user_exist);
+        $admin_exist = pg_query($db, $sql_check_admin_exist);
+        if($user_exist != 0 || $admin_exist != 0){
+            $check = false;
+            echo "Email account already registered. <br/>";
+        }
+
         if($check){
-    	$sql = "INSERT INTO users (name, email, password) VALUES('".$name."', '".$email."', '".$p1."')";
-    	echo "$sql <br/>"; // for debugging
-    	$add = pg_query($db, $sql);
-    	if($add) echo "add user $name successful <br/>";
-        header("Location: homepage.php");
+    	   $sql = "INSERT INTO users (name, email, password) VALUES('".$name."', '".$email."', '".$p1."')";
+    	   echo "$sql <br/>"; // for debugging
+    	   $add = pg_query($db, $sql);
+    	   if($add) echo "add user $name successful <br/>";
+                header("Location: homepage.php");
     	}
         $check = true;
     }

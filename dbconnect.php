@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>db connection</title>
+	<title>Profile</title>  <!--for display on profile.php due to include head-->
 </head>
 <body>
 
