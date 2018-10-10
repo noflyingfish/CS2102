@@ -20,6 +20,7 @@
       <li>
       <button type="login" name="login"/> Login
       <button type="signup" name="signup" /> Sign up
+      <button type="admin" name="admin" /> Admin Login
       </li>
     </form>
 
@@ -40,6 +41,10 @@
 
     if(isset($_POST['signup'])){
       header("Location: createuser.php");
+    }
+    
+      if(isset($_POST['admin'])){
+      header("Location: adminlogin.php");
     }
 
     if(isset($_POST['login'])){

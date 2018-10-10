@@ -8,7 +8,7 @@
 <body>
 
   <img src="banner.jpg">
-  <h2>Welcome</h2>
+  <h2>Administrator Login</h2>
   
   <ul> 
     <form name="display" method="POST">

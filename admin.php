@@ -37,7 +37,7 @@ include('dbconnect.php');
                         echo "Not logged in. Redirect";
                          header("Location: homepage.php");
 					}
-					$sql = "SELECT * FROM users WHERE email = '$user_email'"; ///do sql query
+					$sql = "SELECT * FROM admin WHERE email = '$user_email'"; ///do sql query
 					$result = pg_query($db, $sql);
 					$row = pg_fetch_assoc($result);
 					$user_name = $row['name'];
