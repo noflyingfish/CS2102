@@ -38,7 +38,7 @@
 
     if(isset($_POST['login'])){
 
-      if(count(array_filter($_POST))!=count($_POST)){
+      if($uemail == "" || $pw == "") {
         echo "Please key in your login details";
         throw new Exception('process_z failed');
       }
