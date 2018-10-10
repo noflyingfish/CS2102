@@ -9,7 +9,7 @@
 
   <h1>Create your Project!</h1>
   <h2>Please fill in the Relevant details below</h2>
-  
+
 <form name="create project" action="createProject.php" method="POST">
 	<li>Title:
 	<input type="text" name ="title"> </li>
@@ -35,8 +35,8 @@
 </form>
 
 
-    </body> 
-    
+    </body>
+
 <?php
 		//getting variable from another php
 		session_start();
@@ -50,10 +50,10 @@
           $endDate = $_POST['endDate'];
           $target = $_POST['targetCapital'];
           $curr = $_POST['currentCapital'];
-          $keywords = $_POST['keywords']; 
+          $keywords = $_POST['keywords'];
           $create = true;
-          
-         
+
+
           //Validation for blank info
           if ($title == "" || $startDate == "" || $endDate == "" || $target == "" || $curr == "" || $keywords == "" || $description == "") {
             $create = false;
@@ -62,27 +62,25 @@
 
           //Add to database
           if($create) {
-            $sql_project = "INSERT INTO project (curr$, total$, title, description, project_keywords, start_date, end_date) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."')";
+            $sql_project = "INSERT INTO project (curr$, total$, title, description, project_keywords, start_date, end_date) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."') RETURNING id";
             $add_project = pg_query($db,$sql_project);
-            
-            $new_project = pg_fetch_array($result);
-            $new_project_id = $new_project[0];
+            $result = pg_fetch_row($add_project);
+            $last_id = $result[0];
+            $sql_own = "INSERT INTO own VALUES('$user_email','$last_id')";
+            $add_own = pg_query($db, $sql_own);
 
-            $sql_own = "INSERT INTO own VALUES(".$new_project_id.",'$user_email')";
-            echo "$sql_own <br/>";
-            //$add_own = pg_query($db, $sql_own);
-            
+
             if($add_project){
-                echo "Project $title has been successfully created"; 
+                echo "Project $title has been successfully created";
             }else {
                 echo "failed";    //debug
             }
           }else{
                 echo "failed2";   //debug
           }
-          $create = true; //to reset          
+          $create = true; //to reset
         }
-        
+
          if(isset($_POST['back_btn'])){
          header("Location: profile.php");
     }
