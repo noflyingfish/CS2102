@@ -9,8 +9,8 @@
 
   <img src="banner.jpg">
   <h2>Administrator Login</h2>
-  
-  <ul> 
+
+  <ul>
     <form name="display" method="POST">
       <li>Email:
       <input type="text" name ="email"> </li>
@@ -20,7 +20,7 @@
       <li>
       <button type="login" name="login"/> Login
       &nbsp
-      <button type="signup" name="userlogin" /> Back to Normal User Login
+      <button type="submit" name="userlogin" /> Back to Normal User Login
       </li>
     </form>
 
@@ -39,7 +39,7 @@
       $pw = $_POST['password'];
     }
 
-    if(isset($_POST['signup'])){
+    if(isset($_POST['userlogin'])){
       header("Location: homepage.php");
     }
 

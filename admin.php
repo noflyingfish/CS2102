@@ -30,17 +30,11 @@ session_start();
 			<td>Name:</td>
 
 			<td><?php
-<<<<<<< HEAD
           $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
 					$user_email = $_SESSION["admin_email"];
-=======
-					include('dbconnect.php');
-                    $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
-					$user_email = $_SESSION["user_email"];
->>>>>>> bd8a8c73950dae0a6cd489e9199ae7ee2c7b5bbe
 					if ($user_email == ""){
                         echo "Not logged in. Redirect";
-                        header("Location: homepage.php");
+                        header("Location: adminlogin.php");
 					}
 					$sql = "SELECT * FROM admin WHERE email = '$user_email'"; ///do sql query
 					$result = pg_query($db, $sql);
@@ -68,12 +62,8 @@ session_start();
 	error_reporting(E_ALL);
 
     include('dbconnect.php');
-<<<<<<< HEAD
 
 
-=======
-	
->>>>>>> bd8a8c73950dae0a6cd489e9199ae7ee2c7b5bbe
 	if (isset($_POST['mod'])){
 		header("Location: moderate.php");  //admin will search for project and get project id. Will key in project id and then edit the details respectively.
 	}
