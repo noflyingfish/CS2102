@@ -20,10 +20,12 @@
 	<li>Confirm Password:
 	<input type="password" name="password_2"> </li>
 	<input type="submit" value="Create New User" name="submit" >
+	<input type="submit" value="Back to Profile" name="back_btn" >
 </form>
 
 <?php
     include('dbconnect.php');
+    session_start();     
     if(isset($_POST['submit'])){
     	$name = $_POST['name'];
         $email = $_POST['email'];
@@ -58,9 +60,23 @@
     	   echo "$sql <br/>"; // for debugging
     	   $add = pg_query($db, $sql);
     	   if($add) echo "add user $name successful <br/>";
-                header("Location: homepage.php");
+                
+                if($_SESSION["mod"] == false){       //check if mod or user called this page, then return to the appropriate page
+                    header("Location: homepage.php");
+                }else{
+                    header("Location: admin.php");
+                }
     	}
         $check = true;
+    }
+    
+    //back button
+    if(isset($_POST['back_btn'])){
+        if($_SESSION["mod"] == false){       //check if mod or user called this page, then return to the appropriate page
+                        header("Location: homepage.php");
+                    }else{
+                        header("Location: admin.php");
+                    }
     }
 ?>
 </body>
