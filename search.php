@@ -31,47 +31,42 @@
 
         if($check){
             $sql = "SELECT title, description, start_date, end_date, curr$, total$ FROM project WHERE title LIKE '%$q%'";
-    	}
-    	else{
+    	}else{
             $sql = "SELECT title, description, start_date, end_date, curr$, total$ FROM project";
             $q = "everything";
     	}
 
-    	$result = pg_query($db, $sql);
-    	//here on prints the seach results nicely in a table
-        $i = 0;
-        echo "<html><body><table><tr>";
-        while ($i < pg_num_fields($result)){
-            $fieldName = pg_field_name($result, $i);
-            echo "<td>  " . $fieldName . " </td> ";
-            $i = $i + 1;
+    	$result = pg_query($db, $sql); // the result of the query
+        $col = pg_num_fields($result); // the number of column
+
+        echo '<table border = "1"><tr>'; //html code for the table
+        for($x = 0; $x < $col; $x++) { //for loop to print the table headings
+            $fieldName = pg_field_name($result, $x); //$result as an array, $x as index
+            echo "<th>".$fieldName."</th>";
         }
-        echo "</tr>";
-        $i = 0;
-
-        while ($row = pg_fetch_row($result)){
-            echo "<tr>";
-            $count = count($row);
-            $y = 0;
-            while ($y < $count) {
-                $c_row = current($row);
-
-                if ($y % 4 == 0 && $y != 0){
-                    echo "<td> " . $c_row . " &nbsp <button>Support</button> </td>";
-                }else{
-                    echo "<td> " . $c_row . " &nbsp </td>";
-                }
-
-                next($row);
-                $y = $y + 1;
-            }
-            echo "</tr>";
+        echo "<th>Sarpork!</th>";
+        
+        while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
+            echo "<tr>"; //html for new row, for data
+            echo "<td> $row[0] </td>";
+            echo "<td> $row[1] </td>";
+            echo "<td> $row[2] </td>";
+            echo "<td> $row[3] </td>";
+            echo "<td> $row[4] </td>";
+            echo "<td> $row[5] </td>";
+            echo "<td> <form name=\"support_btn\" method=\"POST\">
+                        <button type=\"support\" name=\"support\"> SUPPORT
+                        <button type=\"support\" name=\"support\"> SUPPORT
+                        <button type=\"support\" name=\"support\"> SUPPORT
+                        </form>";
         }
-        pg_free_result($result);
-        echo "</table></body></html>";
+        echo "</table>";
 
     	if($result) echo "Search results for $q returned <br/>";
         $check = true;
+    }
+    if(isset($_POST['support'])){
+      header("Location: placeholder.php");
     }
 
     if(isset($_POST['back_btn'])){
