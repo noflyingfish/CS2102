@@ -31,10 +31,10 @@ session_start();
 
 			<td><?php
           $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
-					$user_email = $_SESSION["admin_email"];
+					$user_email = $_SESSION["user_email"];
 					if ($user_email == ""){
                         echo "Not logged in. Redirect";
-                        header("Location: adminlogin.php");
+                        header("Location: homepage.php");
 					}
 					$sql = "SELECT * FROM admin WHERE email = '$user_email'"; ///do sql query
 					$result = pg_query($db, $sql);
