@@ -1,4 +1,8 @@
+
 <?php
+//remaining tasks: edit and delete 'own' and 'support' entries
+
+
 // start the session before all
 session_start();
 ?>
@@ -16,6 +20,7 @@ session_start();
 	<div class="menu">
 	<form method="POST" >
 	  <button name="create">Create Project</button>
+	  <button name="createuser">Create User</button>
 	  <button name="mod">Moderate Projects</button>
 	  <button name="moduser">Moderate Users</button>
 	  <button name="detail">Admin Details</button>
@@ -30,6 +35,7 @@ session_start();
 			<td>Name:</td>
 
 			<td><?php
+			include('dbconnect.php');
           $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
 					$user_email = $_SESSION["user_email"];
 					if ($user_email == ""){
@@ -76,9 +82,12 @@ session_start();
 	if (isset($_POST['moduser'])){
 		header("Location: moderateuser.php");
 	}
+	if (isset($_POST['createuser'])){
+		header("Location: createuser.php");
+	}
 	if (isset($_POST['logout'])){
-		session_start();
-        unset($_SESSION["admin_email"]);
+    
+        unset($_SESSION["user_email"]);    //clear the 'cookies'
         unset($_SESSION["mod"]);
         header("Location: homepage.php");
 	}
