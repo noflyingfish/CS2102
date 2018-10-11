@@ -81,8 +81,13 @@
           $create = true; //to reset
         }
 
-         if(isset($_POST['back_btn'])){
-         header("Location: profile.php");
+         if(isset($_POST['back_btn'] )){
+         
+            if($_SESSION["mod"] == false){
+                header("Location: profile.php");
+                }else {
+                     header("Location: admin.php");
+                }
     }
 ?>
 
