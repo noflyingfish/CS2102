@@ -20,6 +20,7 @@
 
 <?php
     include('dbconnect.php');
+    session_start();
 
     if(isset($_POST['search_btn'])){
     	$q = $_POST['query'];
@@ -30,9 +31,9 @@
         }
 
         if($check){
-            $sql = "SELECT title, description, start_date, end_date, curr$, total$ FROM project WHERE title LIKE '%$q%'";
+            $sql = "SELECT id, title, description, start_date, end_date, curr$, total$ FROM project WHERE title LIKE '%$q%'";
     	}else{
-            $sql = "SELECT title, description, start_date, end_date, curr$, total$ FROM project";
+            $sql = "SELECT id, title, description, start_date, end_date, curr$, total$ FROM project";
             $q = "everything";
     	}
 
@@ -40,7 +41,7 @@
         $col = pg_num_fields($result); // the number of column
 
         echo '<table border = "1"><tr>'; //html code for the table
-        for($x = 0; $x < $col; $x++) { //for loop to print the table headings
+        for($x = 1; $x < $col; $x++) { //for loop to print the table headings, starts at 1 to skip id
             $fieldName = pg_field_name($result, $x); //$result as an array, $x as index
             echo "<th>".$fieldName."</th>";
         }
@@ -48,16 +49,12 @@
         
         while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
             echo "<tr>"; //html for new row, for data
-            echo "<td> $row[0] </td>";
-            echo "<td> $row[1] </td>";
-            echo "<td> $row[2] </td>";
-            echo "<td> $row[3] </td>";
-            echo "<td> $row[4] </td>";
-            echo "<td> $row[5] </td>";
+           for($y = 1; $y < $col; $y++){ // starts at 1 to skip id
+            echo "<td> $row[$y] </td>";
+           };
             echo "<td> <form name=\"support_btn\" method=\"POST\">
                         <button type=\"support\" name=\"support\"> SUPPORT
-                        <button type=\"support\" name=\"support\"> SUPPORT
-                        <button type=\"support\" name=\"support\"> SUPPORT
+                        <button type=\"details\" name=\"details\" value=\" $row[0]\"> View Details 
                         </form>";
         }
         echo "</table>";
@@ -66,11 +63,15 @@
         $check = true;
     }
     if(isset($_POST['support'])){
-      header("Location: placeholder.php");
+        header("Location: placeholder.php");
+    }
+    if(isset($_POST['details'])){
+        $_SESSION["id"] = $_POST['details'];
+        header("Location: item.php");
     }
 
     if(isset($_POST['back_btn'])){
-         header("Location: profile.php");
+        header("Location: profile.php");
     }
 ?>
 </body>
