@@ -55,7 +55,7 @@ include('dbconnect.php');
 				<tr>
 					<td>Owned:</td>
 					<td><?php
-                        $sql = "SELECT COUNT(*) as owned FROM own WHERE email = '$user_email'";
+                        $sql = "SELECT COUNT(*) as owned FROM project WHERE own = '$user_email'";
                         $result = pg_query($db, $sql);
                         $row = pg_fetch_assoc($result);
                         $count = $row['owned'];
