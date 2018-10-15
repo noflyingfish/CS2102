@@ -71,7 +71,7 @@ session_start();
 
 
 	if (isset($_POST['mod'])){
-		header("Location: moderate.php");  //admin will search for project and get project id. Will key in project id and then edit the details respectively.
+		header("Location: search.php");  //admin will search for project to moderate
 	}
 	if (isset($_POST['create'])){
 		header("Location: createProject.php");  //let admin create a project normally. check for mod status on createProject.php using session var, then give additional powers. Also reroute the back button to admin page instead of normal user page by using session var.
