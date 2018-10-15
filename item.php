@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<h1>Project Item</h1>
+<h1>Project Details</h1>
+
+
 
 <?php
 	include('dbconnect.php');
@@ -16,6 +18,10 @@
 
 	$sql = "SELECT * FROM project WHERE id = '$id'";
 	$result = pg_query($db, $sql);
+	
+	
+
+	
 
 	///boolean.check that the user viewing this is the admin or owner.
 ?>
@@ -56,5 +62,17 @@
 			$end = pg_fetch_result($result, 0, 7);
 			echo "$end"; 
 		?></td>
+		
+<form name="item" action="item.php" method="POST">
+	<input type="submit" value="go back to profile" name="back_btn" >
+</form>
+
+<?php
+
+    if(isset($_POST['back_btn'])){
+            header("Location: profile.php");
+        }
+?>
+		
 </body>
 </html>
