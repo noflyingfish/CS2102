@@ -32,7 +32,7 @@ include('dbconnect.php');
 			<td>Name:</td>
 
 			<td><?php
-
+                    $_SESSION["mod"] = false;   //disable mod status
 					$user_email = $_SESSION["user_email"];
 					if ($user_email == ""){
                         echo "Not logged in. Redirect";
