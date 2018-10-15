@@ -17,9 +17,9 @@ include('dbconnect.php');
 	<td>
 	<div class="menu">
 	<form method="POST" >
-	  <button name="profile">Profile</button>
+	 
 	  <button name="create">Create Project</button>
-	  <button name="view">View Project</button>
+	  <button name="view">Search Projects</button>
 	  <button name="detail">User Details</button>
 	  <button name="logout">Log Out</button>
 	</form>
@@ -89,9 +89,7 @@ include('dbconnect.php');
 
     include('dbconnect.php');
 
-	if (isset($_POST['profile'])){
-		header("Location: profile.php");
-	}
+	
 	if (isset($_POST['create'])){
 		header("Location: createProject.php");
 	}
