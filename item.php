@@ -31,7 +31,7 @@
 			$title = pg_fetch_result($result, 0, 3); //fetch ($resource, row, col) from the database
 			echo "$title"; 
 		?></td>
-		<td></td> <!-- echo edit and delete button if owner/admin is the  -->
+		<td></td> <!-- echo edit and delete button if owner/admin is the  --> 
 
 	<tr><td>Description:</td>
 		<td><?php 
@@ -70,7 +70,11 @@
 <?php
 
     if(isset($_POST['back_btn'])){
-            header("Location: profile.php");
+            if($_SESSION["mod"] == true){
+                header("Location: admin.php");
+            }else{
+                header("Location: profile.php");
+            }
         }
 ?>
 		
