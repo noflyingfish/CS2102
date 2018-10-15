@@ -20,7 +20,7 @@
 	<li>Confirm Password:
 	<input type="password" name="password_2"> </li>
 	<input type="submit" value="Create New User" name="submit" >
-	<input type="submit" value="Back to Profile" name="back_btn" >
+	<input type="submit" value="Back" name="back_btn" >
 </form>
 
 <?php
