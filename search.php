@@ -54,8 +54,16 @@
            };
             echo "<td> <form name=\"support_btn\" method=\"POST\">
                         <button type=\"support\" name=\"support\"> SUPPORT
-                        <button type=\"details\" name=\"details\" value=\" $row[0]\"> View Details 
-                        </form>";
+                        <button type=\"details\" name=\"details\" value=\" $row[0]\"> View Details";
+                        
+                        //admin.php will route here to use search.php to find projects to modify. This checks if the session requesting this page is mod-enabled or not and if so, //returns an additional button for moderators to use
+                        if($_SESSION["mod"] == true){           
+                            echo "<button type=\"modify\" name=\"modify\" value=\" $row[0]\"> Modify";
+                        }
+                        
+                        echo "</form>";
+                        
+                    
         }
         echo "</table>";
 
@@ -71,7 +79,19 @@
     }
 
     if(isset($_POST['back_btn'])){
+    
+        //reroute back to the correct page since admin is sharing usage of this page as well
+        if($_SESSION["mod"] == true){
+            header("Location: admin.php");
+        }else{
         header("Location: profile.php");
+        }
+    }
+    
+    //for admin use only
+     if(isset($_POST['modify'])){
+        $_SESSION["id"] = $_POST['modify'];       //pass id into moderate page. moderate.php will now directly pull up the project with id $_SESSION["id"] for the admin to edit
+        header("Location: moderate.php");
     }
 ?>
 </body>
