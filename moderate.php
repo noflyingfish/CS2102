@@ -10,35 +10,21 @@
 <h1>Crowd Funding</h1>
 <h2>Project Moderation</h2>
 
-<form name="search" action="moderate.php" method="POST">
-	Enter ID of Project to moderate:
-	<input type="text" name ="projID">
-	<input type="submit" value="Retrieve" name="search_btn" >
-	<input type="submit" value="Go Back" name="back_btn" >
-
+<form name="moderate" action="moderate.php" method="POST">
+	
+	<input type="submit" value="Go back to profile" name="back_btn" >
 </form>
 
-
 <?php
+            include('dbconnect.php');
           session_start();
           if($_SESSION["mod"] == false)    //added layer of security. Test by logging in as normal user then go to localhost/moderate.php 
           {
                  header("Location: homepage.php");
           }
           
-          include('dbconnect.php');
-          
-if(isset($_POST['search_btn'])){
-    	$q = $_POST['projID'];
-        $check = true;
-
-        if($q == ""){
-            $check = false;
-            echo "Please enter a query.";
-        }
-
-        if($check){
-            $_SESSION["ID"] = $q;       //make ID 'global' to access it below
+            
+            $q = $_SESSION["id"]; 
             $sql = "SELECT * FROM project WHERE id = '$q'";
             //echo "$sql <br/>"; // for debugging
             
@@ -75,12 +61,8 @@ if(isset($_POST['search_btn'])){
 	
                 }
 	
-
-    	}
     	
     	
-    	
-    }
     
     	
     	   //update the project with whatever is in the fields
