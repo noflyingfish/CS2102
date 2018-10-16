@@ -38,23 +38,23 @@
 
     if(isset($_POST['login'])){
 
-      $sql_user = "SELECT * FROM users WHERE email = '$uemail' AND password = '$pw'";
-      $is_user = pg_query($db, $sql_user);
-      $count_user = pg_num_rows($is_user);// 1 if exist.
-      $sql_admin = "SELECT * FROM admin WHERE email = '$uemail' AND password = '$pw'";
-      $is_admin = pg_query($db, $sql_admin);
-      $count_admin = pg_num_rows($is_admin);// 1 if exist
-
-      if($count_admin == 1) {
-        echo "Logged in Successfully";
-        header("Location: admin.php");
-      }else if($count_user == 1) {
-        echo "Logged in Successfully";
-        header("Location: profile.php");
-      }else if($uemail == "" || $pw == "") {
+      if($uemail == "" || $pw == ""){
         echo "Please key in your login details";
-      }else {
-        echo "Wrong Password or Email";
+      }else{
+
+      $sql_is_admin = "SELECT admin FROM users WHERE email = '$uemail' AND password = '$pw'";
+      $result = pg_query($db, $sql_is_admin);
+      $exist = pg_num_rows($result); // 0 for wrong email/pw, 1 for account exist
+      $row = pg_fetch_row($result);
+      $is_admin = $row[0];
+
+        if($exist == 0){ // wrong pw/email
+          echo "Wrong Password or Email";
+        }else if($is_admin == 0){ //normal user
+          header("Location: profile.php");
+        }else if($is_admin == 1 ){ //admin user
+          header("Location: admin.php");
+        }
       }
     }
   ?>

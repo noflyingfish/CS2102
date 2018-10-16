@@ -80,15 +80,8 @@ include('dbconnect.php');
 
 
 <?php
-	//show error message
-
-	//echo "$user_email";
-
 	ini_set("display_errors", "1");
 	error_reporting(E_ALL);
-
-    include('dbconnect.php');
-
 	
 	if (isset($_POST['create'])){
 		header("Location: createProject.php");

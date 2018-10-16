@@ -41,42 +41,41 @@
             echo "Password and confirm password does not match.<br/>";
         }
 
-        $sql_check_user_exist = "SELECT * FROM users where email = '$email'";
-        $user_result = pg_query($db, $sql_check_user_exist);
-        $user_exist = pg_num_rows($user_result);
+        if(strpos($email, '@') === false){
+            echo "Please enter a valid email address!<br/>";
+        } else{
+            $sql_check_user_exist = "SELECT * FROM users where email = '$email'";
+            $user_result = pg_query($db, $sql_check_user_exist);
+            $user_exist = pg_num_rows($user_result);
 
-        $sql_check_admin_exist = "SELECT * FROM admin where email = '$email'";
-        $admin_result = pg_query($db, $sql_check_admin_exist);
-        $admin_exist = pg_num_rows($admin_result);
-        ;
+            if($user_exist != 0){
+                $check = false;
+                echo "Email account already registered. <br/>";
+            }
 
-        if($user_exist != 0 || $admin_exist != 0){
-            $check = false;
-            echo "Email account already registered. <br/>";
+            if($check){
+        	   $sql = "INSERT INTO users (name, email, password) VALUES('".$name."', '".$email."', '".$p1."')";
+        	   echo "$sql <br/>"; // for debugging
+        	   $add = pg_query($db, $sql);
+        	   if($add) echo "add user $name successful <br/>";
+                    
+                    if($_SESSION["mod"] == false){ //check if mod or user called this page, then return to the appropriate page
+                        header("Location: homepage.php");
+                    }else{
+                        header("Location: admin.php");
+                    }
+        	}
         }
-
-        if($check){
-    	   $sql = "INSERT INTO users (name, email, password) VALUES('".$name."', '".$email."', '".$p1."')";
-    	   echo "$sql <br/>"; // for debugging
-    	   $add = pg_query($db, $sql);
-    	   if($add) echo "add user $name successful <br/>";
-                
-                if($_SESSION["mod"] == false){       //check if mod or user called this page, then return to the appropriate page
-                    header("Location: homepage.php");
-                }else{
-                    header("Location: admin.php");
-                }
-    	}
         $check = true;
     }
     
     //back button
     if(isset($_POST['back_btn'])){
         if($_SESSION["mod"] == false){       //check if mod or user called this page, then return to the appropriate page
-                        header("Location: homepage.php");
-                    }else{
-                        header("Location: admin.php");
-                    }
+            header("Location: homepage.php");
+        }else{
+            header("Location: admin.php");
+        }
     }
 ?>
 </body>
