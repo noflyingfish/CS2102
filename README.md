@@ -8,7 +8,8 @@ CREATE TABLE users (
 name VARCHAR(64) NOT NULL,
 email VARCHAR(128) PRIMARY KEY,
 password VARCHAR(32) NOT NULL,
-admin INT CHECK (admin IN (0,1))
+admin INT DEFAULT 0,
+CHECK (admin IN (0,1))
 );
 
 CREATE TABLE project (
