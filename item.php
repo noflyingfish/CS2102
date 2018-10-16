@@ -64,17 +64,13 @@
 		?></td>
 		
 <form name="item" action="item.php" method="POST">
-	<input type="submit" value="go back to profile" name="back_btn" >
+	<input type="submit" value="Back to Search" name="back_btn" >
 </form>
 
 <?php
 
     if(isset($_POST['back_btn'])){
-            if($_SESSION["mod"] == true){
-                header("Location: admin.php");
-            }else{
-                header("Location: profile.php");
-            }
+           header("Location: search.php");
         }
 ?>
 		
