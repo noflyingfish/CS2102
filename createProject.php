@@ -61,13 +61,14 @@
           }
 
           //Add to database
+          //Task1: Please note that if admin attempts to create a project, an error will be raised because the 'own' column references users(email) in which the admin's email is not found. Multiple workarounds are possible. 
+          //Task2: Also need to find a way to insert the many different keywords into the keywords table.  
           if($create) {
-            $sql_project = "INSERT INTO project (curr$, total$, title, description, project_keywords, start_date, end_date) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."') RETURNING id";
+            $sql_project = "INSERT INTO project (curr$, total$, title, description, project_keywords, start_date, end_date, own) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$keywords."', '".$startDate."', '".$endDate."', '".$user_email."') RETURNING id";
             $add_project = pg_query($db,$sql_project);
             $result = pg_fetch_row($add_project);
             $last_id = $result[0];
-            $sql_own = "INSERT INTO own VALUES('$user_email','$last_id')";
-            $add_own = pg_query($db, $sql_own);
+    
 
 
             if($add_project){
