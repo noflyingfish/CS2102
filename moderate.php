@@ -1,3 +1,7 @@
+<!--This file does the editing/deleting of projects. Currently only used by admins, but can be reconfigured to be used by owners of projects.-->
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +16,7 @@
 
 <form name="moderate" action="moderate.php" method="POST">
 	
-	<input type="submit" value="Go back to profile" name="back_btn" >
+	<input type="submit" value="Back to Search" name="back_btn" >
 </form>
 
 <?php
@@ -24,7 +28,7 @@
           }
           
             
-            $q = $_SESSION["id"]; 
+            $q = $_SESSION["id"];          //note session variable names are case sensitive!
             $sql = "SELECT * FROM project WHERE id = '$q'";
             //echo "$sql <br/>"; // for debugging
             
@@ -68,53 +72,62 @@
     	   //update the project with whatever is in the fields
     if (isset($_POST['update'])) {	
    
-      $id = $_SESSION["ID"];             
+      $id = $_SESSION["id"];             
       $title = $_POST['new_title'];
       $description = $_POST['new_description'];
       $curr = $_POST['new_curr'];
       $end_date = $_POST['new_end'];
-      $keywords = $_POST['new_keyword'];
+      $keywords = $_POST['new_keyword'];    //Task 1: Do update for keywords in keywords table
       $total = $_POST['new_total'];
       $start_date = $_POST['new_start'];
       
     
     
     	$sql = "UPDATE project SET title = '$title', description = '$description', curr$ = '$curr', 
-      total$ = '$total', start_date = '$start_date', end_date = '$end_date', project_keywords = '$keywords' WHERE id = '$id'";
+      total$ = '$total', start_date = '$start_date', end_date = '$end_date' WHERE id = '$id'";
 			//echo $sql . "<br>";
 			$result = pg_query($db, $sql);
 
 			if($result) {
-				echo "Your project details are updated!";
+                header("Refresh:0");  //refresh the page
+				echo "Project details updated!";
 			}
 			else {
-				echo "Project $id was not updated.";
+				echo "Project with id $id was not updated.";
 			}
 		}
      
 	   if (isset($_POST['delete'])) {	
    
-      $id = $_SESSION["ID"];             
+      $id = $_SESSION["id"];             
       
-        $sql3 = "DELETE FROM own WHERE id = '$id'";    //manual delete cascading
+        
         $sql2 = "DELETE FROM support WHERE id = '$id'";     //manual delete cascading
     	$sql = "DELETE FROM project WHERE id = '$id'";
-			//echo $sql . "<br>";
-			$result3 = pg_query($db,$sql3);
+	
+			
 			$result2 = pg_query($db,$sql2);
 			$result = pg_query($db, $sql);
 			
 
 			if($result) {
-				echo "Your project details are updated!";
+				echo "Project deleted!!";
+                 echo "<td> <form name=\"back_btn\" method=\"POST\">
+                        <button type=\"back\" name=\"back\"> Back to Search
+                        </form>";
+				
+				if(isset($_POST['back'])){
+                    header("Location: search.php");
+				}
+				
 			}
 			else {
-				echo "Project $id was not updated.";
+				echo "Project with id $id was not deleted.";
 			}
 		}
      
-       if (isset($_POST['back_btn'])) {	
-              header("Location: admin.php");
+       if (isset($_POST['back_btn']) || isset($_POST['back'])) {	
+              header("Location: search.php");
    }
 
 ?>
