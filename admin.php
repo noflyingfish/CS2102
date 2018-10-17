@@ -36,17 +36,18 @@ session_start();
 
 			<td><?php
 			include('dbconnect.php');
-          $_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
-					$user_email = $_SESSION["user_email"];
-					if ($user_email == ""){
-                        echo "Not logged in. Redirect";
-                        header("Location: homepage.php");
-					}
-					$sql = "SELECT * FROM admin WHERE email = '$user_email'"; ///do sql query
-					$result = pg_query($db, $sql);
-					$row = pg_fetch_assoc($result);
-					$user_name = $row['name'];
-					echo "$user_name"; ?></td>
+         	$_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
+			$user_email = $_SESSION["user_email"];
+				
+			if ($user_email == ""){
+                echo "Not logged in. Redirect";
+                header("Location: homepage.php");
+			}
+			$sql = "SELECT * FROM users WHERE email = '$user_email'"; ///do sql query
+			$result = pg_query($db, $sql);
+			$row = pg_fetch_assoc($result);
+			$user_name = $row['name'];
+			echo "$user_name"; ?></td>
 
 		<tr>
 			<td>Email:</td>
@@ -66,9 +67,6 @@ session_start();
 	//show error message
 	ini_set("display_errors", "1");
 	error_reporting(E_ALL);
-
-    include('dbconnect.php');
-
 
 	if (isset($_POST['mod'])){
 		header("Location: search.php");  //admin will search for project to moderate
