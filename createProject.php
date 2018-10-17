@@ -74,7 +74,16 @@
         if($add_project){
           echo "Project $title has been successfully created";
           foreach($myArray as $tag) {
-            if ((preg_match("/^[a-zA-Z0-9]+$/", $tag) == 1)) {
+            
+            $sql_check_exist = "SELECT * FROM keywords WHERE id ='$last_id' AND word='$tag'";
+            $result = pg_query($db, $sql_check_exist);
+            $pair_exist = pg_num_rows($result); // 0 if new, 1 if id/word pair already exist.
+
+            if($pair_exist != 0){
+                continue;
+            }
+
+            if ((preg_match("/^[a-zA-Z0-9]+$/", $tag) == 1)) { //1 as true, only a-z A-Z 0-9
               $sql_keyword = "INSERT INTO keywords (id, word) VALUES ('".$last_id."', '".$tag."')";
               $add_keyword = pg_query($db,$sql_keyword);
             }
@@ -87,7 +96,7 @@
         if($add_keyword) {
             echo "<br>Keywords recorded to project";
         }else {
-            echo "<br>Failed to add keywords";    //debug
+            echo "<br>Failed to add keywords"; //debug
         }
       }
       $create = true; //to reset
