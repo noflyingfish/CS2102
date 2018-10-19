@@ -21,7 +21,7 @@
 <?php
     include('dbconnect.php');
     session_start();
-
+    $c = 1;
     if(isset($_POST['search_btn'])){
     	$q = $_POST['query'];
         $check = true;
@@ -47,25 +47,28 @@
         }
         echo "<th>Sarpork!</th>";
         
+        $c = 1; // c as a counter to loop through, and index of each row
         while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
+            
             echo "<tr>"; //html for new row, for data
             for($y = 1; $y < $col; $y++){ // starts at 1 to skip id
                 echo "<td> $row[$y] </td>";
             };
-            echo "<td> <form name=\"support_btn\" method=\"POST\">
-                    <button type=\"support\" name=\"support\"> SUPPORT
+            echo "<td> <button type=\"support\" name=\"support\" onclick=\"show($c)\" > SUPPORT
                     <button type=\"details\" name=\"details\" value=\" $row[0]\"> View Details";
                         
                     //admin.php will route here to use search.php to find projects to modify. This checks if the session requesting this page is mod-enabled or not and if so, //returns an additional button for moderators to use
                     if($_SESSION["mod"] == true){           
                         echo "<button type=\"modify\" name=\"modify\" value=\" $row[0]\"> Modify";
                     }
-                        echo "</form>";
+                        
             // support row, hidden by default. // need to make this appear on click on support button
-            echo "<tr name=\"support_row\" style =\"display:none\">
+            echo "<tr name=\"support_row\" style =\"display:none\" id=\"support_row_$c\">
                     <td>Amount to support:</td>
-                    <td><input type=\"text\" placeholder =\"Supporting Amount\" name=\"amt_support\"></td> 
-                    <td><input type = \"submit\" value =\"Support Your Amount!\" name=\"btn_support\"></td>";
+                    <td><input type=\"text\" placeholder =\"Supporting Amount\" name=\"amt_support_$c\"></td> 
+                    <td><input type = \"submit\" value =\"Support Your Amount!\" name=\"btn_support_$c\"  ></td>";
+            
+            $c = $c +1;
         }
         echo "</table>";
 
@@ -73,9 +76,7 @@
         $check = true;
     }
 
-    if(isset($_POST['support'])){
-        header("Location: placeholder.php");
-    }
+
     if(isset($_POST['details'])){
         $_SESSION["id"] = $_POST['details'];
         header("Location: item.php");
@@ -96,6 +97,22 @@
         header("Location: moderate.php");
     }
 ?>
+
+    <script>
+        function show(c){
+            //alert(c);
+            var displaySetting = document.getElementById('support_row_'+c).style.display;
+            var xx = document.getElementById('support_row_'+c);
+            //alert(displaySetting);
+            //alert(xx);
+            if(displaySetting == 'none'){
+                xx.style.display = 'block';
+            }else{
+                xx.style.display = 'none';
+            }
+
+        }
+    </script>
 
 </body>
 </html>
