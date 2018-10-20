@@ -22,6 +22,7 @@
     include('dbconnect.php');
     session_start();
     $c = 1;
+
     if(isset($_POST['search_btn'])){
     	$q = $_POST['query'];
         $check = true;
