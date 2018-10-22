@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Project</title>
+	<title>Projectsss</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="display.css"/>
 </head>
@@ -31,7 +31,9 @@
 			$title = pg_fetch_result($result, 0, 3); //fetch ($resource, row, col) from the database
 			echo "$title"; 
 		?></td>
-		<td></td> <!-- echo edit and delete button if owner/admin is the  --> 
+		<td><form name="support" action="support.php" method="POST">
+                    <input type="submit" value="Support this Project" name="support_btn" >
+                    </form> </td> <!-- echo edit and delete button if owner/admin is the  --> 
 
 	<tr><td>Description:</td>
 		<td><?php 
@@ -48,18 +50,19 @@
 		<td>Current Amount:</td>
 		<td><?php	
 			$curr = pg_fetch_result($result, 0, 1);
-			echo "$curr"; 
+			
+            echo "$curr";
 		?></td>
 
 	<tr><td>Start Date:</td>
 		<td><?php
-			$start = pg_fetch_result($result, 0, 6);
+			$start = pg_fetch_result($result, 0, 5);
 			echo "$start"; 
 		?></td>
 
-		<td>Start Date:</td>
+		<td>End Date:</td>
 		<td><?php
-			$end = pg_fetch_result($result, 0, 7);
+			$end = pg_fetch_result($result, 0, 6);
 			echo "$end"; 
 		?></td>
 		
