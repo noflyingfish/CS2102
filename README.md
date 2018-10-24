@@ -23,6 +23,7 @@ end_date DATE NOT NULL,
 own VARCHAR(128) NOT NULL,
 CHECK (end_date >= start_date),
 CHECK (total$ >= curr$),
+CHECK (curr$ >= 0)
 FOREIGN KEY (own) REFERENCES users(email)
 );
 
@@ -31,7 +32,8 @@ email VARCHAR(128),
 id INT,
 amt_supported INT NOT NULL,
 FOREIGN KEY (email) REFERENCES users(email),
-FOREIGN KEY (id) REFERENCES project(id)
+FOREIGN KEY (id) REFERENCES project(id),
+CHECK (amt_supported > 0)
 );
 
 CREATE TABLE keywords (
