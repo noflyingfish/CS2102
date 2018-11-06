@@ -22,7 +22,6 @@ start_date DATE DEFAULT CURRENT_DATE,
 end_date DATE NOT NULL,
 own VARCHAR(128) NOT NULL,
 CHECK (end_date >= start_date),
-CHECK (total$ >= curr$),
 CHECK (curr$ >= 0)
 FOREIGN KEY (own) REFERENCES users(email)
 );
