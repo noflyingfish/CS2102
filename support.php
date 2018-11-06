@@ -12,6 +12,7 @@
 
 
 <?php
+error_reporting(E_ERROR | E_PARSE);
 	include('dbconnect.php');
 	session_start();
 	$id = $_SESSION["id"];
@@ -84,15 +85,32 @@
            $email = $_SESSION["user_email"];
            $id = $_SESSION["id"];
            echo "Amount supported:"; echo "$amount";
-            $sql = "UPDATE project SET curr$ = curr$ + $amount WHERE id = '$id'";
-            $sql2 = "INSERT INTO support (email, id, amt_supported) VALUES('".$email."', '".$id."', '".$amount."')";
+			$sql = "UPDATE project SET curr$ = curr$ + $amount WHERE id = '$id'";
+			$result = pg_query($db, $sql); // the result of the query
+			
+		   	// calculate row
+			$sql3 = "SELECT email From support Where email = '$email'AND id = '$id'";
+			$result3 = pg_query($db,$sql3);
+			$col = pg_num_fields($result3);
 
-            $result = pg_query($db, $sql); // the result of the query
-            $result2 = pg_query($db, $sql2); // the result of the second query
 
-            if($result && $result2){
+		   // Supporting first time
+			$sql2 = "INSERT INTO support (email, id, amt_supported) VALUES('".$email."', '".$id."', '".$amount."')";
+			//$result2 = pg_query($db, $sql2); // the result of the second query
+			$sql4 = "UPDATE support set amt_supported = amt_supported +$amount where id = '$id'";
+
+
+			//check to see if its first time supporting
+			if($col == 1){
+				$result5 = pg_query($db,$sql4);
+			}else{ // first time
+				$result5 = pg_query($db,$sql2);
+			}
+
+
+            if($result && $result5){
                 echo ". Thank you for your contribution!";
-            }else {
+			}else{
                 echo "Something went wrong, please try again!";
             }
 
