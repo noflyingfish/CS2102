@@ -40,12 +40,12 @@
         if($check){
             $sql = //"SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.curr$, p.total$
 					//FROM project p WHERE UPPER(p.title) LIKE UPPER('%$q%')";
-					"SELECT DISTINCT p.id, p.title, p.description, p.curr$, p.total$
+					"SELECT DISTINCT p.id, p.title AS Title, p.description AS Description, p.curr$, p.total$
 					FROM project p, keywords k
 					WHERE k.id = p.id
 					AND ((UPPER(p.title) LIKE UPPER('%$q%')) OR (UPPER(k.word) LIKE UPPER('%$q%')))";
     	}else{
-            $sql = "SELECT id, title, description, curr$, total$ FROM project";
+            $sql = "SELECT id, title AS Title, description AS Description, curr$, total$ FROM project";
             $q = "everything";
     	}
 
@@ -53,18 +53,21 @@
         $col = pg_num_fields($result); // the number of column
         if($result) echo "Search results for $q returned <br/>";
 			//print table headers
-      echo '<table border = "1"><tr>'; //html code for the table
-      for($x = 1; $x < $col; $x++) { //for loop to print the table headings, starts at 1 to skip id
-          $fieldName = pg_field_name($result, $x); //$result as an array, $x as index
-          
-          if($x == 3){   
-          } else if($x == 4){
-            echo "<th> Status </th>";
-          }else{
-            echo "<th>".$fieldName."</th>";
-          }
+        echo '<table border = "1"><tr>'; //html code for the table
+        for($x = 1; $x < $col; $x++) { //for loop to print the table headings, starts at 1 to skip id
+            $fieldName = pg_field_name($result, $x); //$result as an array, $x as index
+            if($x == 1)
+                echo "<th>Title</th>";
+            if($x == 2)
+                echo "<th>Description</th>";
+            if($x == 3) 
+                echo "<th>Status</th>";
+            if($x == 4)
+                echo "<th>View</th>";
+           //  }else{
+           //      echo "<th>".$fieldName."</th>";
+           // }
       }
-      echo "<th>View Details</th>";
 
       $c = 1; // c as a counter to loop through, and index of each row
       while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
