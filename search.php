@@ -2,10 +2,10 @@
 	<html>
 		<head>
 			<title>Search</title>
-
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<link rel="stylesheet" type="text/css" href="display.css"/>
-		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		</head>
 
 		<body>
@@ -20,14 +20,14 @@
 	    </select>
 
 			<input type="text" name ="query" placeholder="Search">
-			<input type="submit" value="search" name="search_btn" >
+			<input type="submit" value="search" name="search_btn" class="btn btn-outline-primary btn-sm" >
 			&nbsp
-			<input type="submit" value="go back to profile" name="back_btn" >
+			<input type="submit" value="go back to profile" name="back_btn" class="btn btn-secondary btn-sm">
 		</form>
 		<br>
 
 			<form name="success" action="search.php" method="POST">
-				<input type="submit" value="Click here to look at all the successfully funded projects" name="success_btn" >
+				<input type="submit" value="Click here to look at all the successfully funded projects" name="success_btn" class="btn btn-warning">
 			</form>
 
 		<?php
@@ -58,7 +58,7 @@
 	        if($result) echo "Search results for $q returned <br/>";
 
 					//print table headers
-	        echo '<table border = "1"><tr>'; //html code for the table
+	        echo '<table border = "1" class="table table-hover"><tr>'; //html code for the table
 	        for($x = 1; $x < $col; $x++) { //for loop to print the table headings, starts at 1 to skip id
 	            $fieldName = pg_field_name($result, $x); //$result as an array, $x as index
 	            if($x == 1)
