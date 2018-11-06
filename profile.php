@@ -20,6 +20,7 @@ include('dbconnect.php');
 	 
 	  <button name="create">Create Project</button>
 	  <button name="view">Search Projects</button>
+        <button name="my_projects">My Projects</button>
 	  <button name="detail">User Details</button>
 	  <button name="logout">Log Out</button>
 	</form>
@@ -91,6 +92,9 @@ include('dbconnect.php');
 	}
 	if (isset($_POST['detail'])){
 		header("Location: update.php");
+	}
+	if (isset($_POST['my_projects'])){
+		header("Location: owner.php");
 	}
 	if (isset($_POST['logout'])){
 		session_start();
