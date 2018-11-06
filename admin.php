@@ -35,28 +35,36 @@ session_start();
 			<td>Name:</td>
 
 			<td><?php
-			include('dbconnect.php');
-         	$_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
-			$user_email = $_SESSION["user_email"];
-				
-			if ($user_email == ""){
-                echo "Not logged in. Redirect";
-                header("Location: homepage.php");
-			}
-			$sql = "SELECT * FROM users WHERE email = '$user_email'"; ///do sql query
-			$result = pg_query($db, $sql);
-			$row = pg_fetch_assoc($result);
-			$user_name = $row['name'];
-			echo "$user_name"; ?></td>
+				include('dbconnect.php');
+	         	$_SESSION["mod"] = true;   //to be passed to other shared php files e.g createproject, update project
+				$user_email = $_SESSION["user_email"];
+					
+				if ($user_email == ""){
+	                echo "Not logged in. Redirect";
+	                header("Location: homepage.php");
+				}
+				$sql = "SELECT * FROM users WHERE email = '$user_email'"; ///do sql query
+				$result = pg_query($db, $sql);
+				$row = pg_fetch_assoc($result);
+				$user_name = $row['name'];
+				echo "$user_name"; ?></td>
 
 		<tr>
 			<td>Email:</td>
 			<td><?php
-					echo "$user_email";
-					?></td>
+				echo "$user_email";
+				?></td>
 		<tr>
+			<td>Project Count:</td>
+			<td><?php 
 
-			</td>
+				?></td>
+
+		<tr>
+			<td>Supported:</td>
+			<td><?php
+
+				?></td>
 
 	</table>
 	</td>
