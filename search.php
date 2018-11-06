@@ -12,8 +12,13 @@
 <h2>Search for a Project</h2>
 
 <form name="search" action="search.php" method="POST">
-	Enter search here:
-	<input type="text" name ="query">
+
+    <select name ="type" >
+        <option value="title">Title</option>
+        <option value="keyword">Keyword</option>
+    </select>
+
+	<input type="text" name ="query" placeholder="Search">
 	<input type="submit" value="search" name="search_btn" >
 	&nbsp
 	<input type="submit" value="go back to profile" name="back_btn" >
@@ -35,12 +40,12 @@
         if($check){
             $sql = //"SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.curr$, p.total$
 					//FROM project p WHERE UPPER(p.title) LIKE UPPER('%$q%')";
-					"SELECT DISTINCT p.id, p.title, p.start_date, p.end_date, p.curr$, p.total$
+					"SELECT DISTINCT p.id, p.title, p.description, p.curr$, p.total$
 					FROM project p, keywords k
 					WHERE k.id = p.id
 					AND ((UPPER(p.title) LIKE UPPER('%$q%')) OR (UPPER(k.word) LIKE UPPER('%$q%')))";
     	}else{
-            $sql = "SELECT id, title, start_date, end_date, curr$, total$ FROM project";
+            $sql = "SELECT id, title, description, curr$, total$ FROM project";
             $q = "everything";
     	}
 
@@ -51,16 +56,35 @@
       echo '<table border = "1"><tr>'; //html code for the table
       for($x = 1; $x < $col; $x++) { //for loop to print the table headings, starts at 1 to skip id
           $fieldName = pg_field_name($result, $x); //$result as an array, $x as index
-          echo "<th>".$fieldName."</th>";
+          
+          if($x == 3){   
+          } else if($x == 4){
+            echo "<th> Status </th>";
+          }else{
+            echo "<th>".$fieldName."</th>";
+          }
       }
       echo "<th>View Details</th>";
 
       $c = 1; // c as a counter to loop through, and index of each row
       while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
-
+        $currAmt = 0;
+        $totalAmt = 0;
         echo "<tr>"; //html for new row, for data
         for($y = 1; $y < $col; $y++){ // starts at 1 to skip id
-            echo "<td> $row[$y] </td>";
+            if($y == 3){
+                $currAmt = $row[$y];
+            }else if($y == 4){
+                $totalAmt = $row[$y];
+                $sta = $totalAmt - $currAmt;
+                if($sta <= 0){
+                    echo "<td>Funded!</td>";
+                }else{ 
+                    echo "<td>Looking for Funds!</td>";
+                }
+            }else{
+                echo "<td> $row[$y] </td>";
+            }
         };
         echo "<td> 
 				<form name=\"support_btn\" method=\"POST\">
