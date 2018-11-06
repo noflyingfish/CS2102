@@ -13,7 +13,8 @@
 
 <form name="search" action="search.php" method="POST">
 
-    <select name ="type" >
+    <select name ="type">
+        <option value="all">All</option>
         <option value="title">Title</option>
         <option value="keyword">Keyword</option>
     </select>
@@ -37,21 +38,35 @@
             $check = false;
         }
 
+        $type = $_POST['type'];
+
         if($check){
-            $sql = //"SELECT p.id, p.title, p.description, p.start_date, p.end_date, p.curr$, p.total$
-					//FROM project p WHERE UPPER(p.title) LIKE UPPER('%$q%')";
-					"SELECT DISTINCT p.id, p.title AS Title, p.description AS Description, p.curr$, p.total$
-					FROM project p, keywords k
-					WHERE k.id = p.id
-					AND ((UPPER(p.title) LIKE UPPER('%$q%')) OR (UPPER(k.word) LIKE UPPER('%$q%')))";
+
+            if($type == "all"){
+                $sql = "SELECT DISTINCT p.id, p.title AS Title, p.description AS Description, p.curr$, p.total$
+					    FROM project p, keywords k
+					    WHERE k.id = p.id
+					    AND ((UPPER(p.title) LIKE UPPER('%$q%')) OR (UPPER(k.word) LIKE UPPER('%$q%')))";
+                        echo "Search results for both keywords and title: $q";
+            }else if($type == "title"){
+                $sql = "SELECT DISTINCT p.id, p.title AS Title, p.description AS Description, p.curr$, p.total$
+                        FROM project p
+                        WHERE ((UPPER(p.title) LIKE UPPER('%$q%')))";
+                        echo "Search results for Title: $q";
+            }else if($type == "keyword"){
+                $sql = "SELECT DISTINCT p.id, p.title AS Title, p.description AS Description, p.curr$, p.total$
+                        FROM project p, keywords k
+                        WHERE k.id = p.id
+                        AND ((UPPER(k.word) LIKE UPPER('%$q%')))";
+                        echo "Search results for Keywords: $q";
+            }
     	}else{
             $sql = "SELECT id, title AS Title, description AS Description, curr$, total$ FROM project";
-            $q = "everything";
+            echo "Search results for all projects.";
     	}
 
         $result = pg_query($db, $sql); // the result of the query
         $col = pg_num_fields($result); // the number of column
-        if($result) echo "Search results for $q returned <br/>";
 			//print table headers
         echo '<table border = "1"><tr>'; //html code for the table
         for($x = 1; $x < $col; $x++) { //for loop to print the table headings, starts at 1 to skip id
@@ -67,10 +82,10 @@
            //  }else{
            //      echo "<th>".$fieldName."</th>";
            // }
-      }
+        }
 
-      $c = 1; // c as a counter to loop through, and index of each row
-      while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
+        $c = 1; // c as a counter to loop through, and index of each row
+        while ($row = pg_fetch_row($result)){ //$row is an array of each row of data
         $currAmt = 0;
         $totalAmt = 0;
         echo "<tr>"; //html for new row, for data
