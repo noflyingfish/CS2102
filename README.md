@@ -33,7 +33,7 @@ id INT,
 amt_supported INT NOT NULL,
 FOREIGN KEY (email) REFERENCES users(email),
 FOREIGN KEY (id) REFERENCES project(id),
-PRIMARY KEY (email, id)
+PRIMARY KEY (email, id),
 CHECK (amt_supported > 0)
 );
 
