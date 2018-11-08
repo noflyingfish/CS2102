@@ -57,7 +57,7 @@
         //view details buton
                     echo "<td> 
                     <form name='support_btn' method='POST'>
-                    <button type='submit' name='details'> View Details
+                    <button type='submit' name='details' value='$row[0]'> View Details
                     </form>";
 
                     
@@ -78,10 +78,11 @@
 //Button handler/events
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
-    //wait until item.php is done by feiyu
+    
     if(isset($_POST['details'])){
         $_SESSION["id"] = $_POST['details'];
-        //header("Location: item.php");
+         $_SESSION["from_location"] = "owner.php";
+        header("Location: item.php");
     }
 
     //back button
