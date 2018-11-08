@@ -117,7 +117,9 @@
 
 		        //admin.php will route here to use search.php to find projects to modify. This checks if the session requesting this page is mod-enabled or not and if so, //returns an additional button for moderators to use
 		        if($_SESSION["mod"] == true){
-		            echo "<button type=\"modify\" name=\"modify\" value=\" $row[0]\"> Modify";
+		            echo "<form name=\"modify_btn\" method=\"POST\">
+		                <button type=\"submit\" name=\"modify_btn\" value=\" $row[0]\"> Modify
+									</form>";
 		        }
 
 		        $c = $c +1;
@@ -146,8 +148,8 @@
 				}
 
 		    //for admin use only
-		     if(isset($_POST['modify'])){
-		        $_SESSION["id"] = $_POST['modify'];//pass id into moderate page. moderate.php will now directly pull up the project with id $_SESSION["id"] for the admin to edit
+		     if(isset($_POST['modify_btn'])){
+		        $_SESSION["id"] = $_POST['modify_btn'];//pass id into moderate page. moderate.php will now directly pull up the project with id $_SESSION["id"] for the admin to edit
 		        header("Location: moderate.php");
 		    }
 		?>
