@@ -73,7 +73,12 @@
 <?php
 
     if(isset($_POST['back_btn'])){
+        if($_SESSION["from_location"] == "owner.php"){
+            $_SESSION["from_location"] = "item.php";
+            header("Location: owner.php");
+        }else{
            header("Location: search.php");
+           }
         }
 ?>
 		
