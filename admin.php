@@ -92,9 +92,10 @@ session_start();
 		header("Location: createuser.php");
 	}
 	if (isset($_POST['logout'])){
-    
+        
         unset($_SESSION["user_email"]);    //clear the 'cookies'
         unset($_SESSION["mod"]);
+     
         header("Location: homepage.php");
 	}
 
