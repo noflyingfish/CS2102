@@ -97,8 +97,10 @@ include('dbconnect.php');
 		header("Location: owner.php");
 	}
 	if (isset($_POST['logout'])){
-		session_start();
-        unset($_SESSION["user_email"]);
+    
+         unset($_SESSION["user_email"]);    //clear the 'cookies'
+        unset($_SESSION["mod"]);
+  
         header("Location: homepage.php");
 	}
 
