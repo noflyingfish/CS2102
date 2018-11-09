@@ -9,27 +9,34 @@
 
   <h1>Create your Project!</h1>
   <h2>Please fill in the Relevant details below</h2>
-
+<table border = "1">
 <form name="create project" action="createProject.php" method="POST">
-	<li>Title:
-	<input type="text" name ="title"> </li>
-	<li>Description:
-	<input type="text" name="description"> </li>
+	<tr>
+  <td><li>Title:
+	<td><input type="text" name ="title"> </li>
+	<tr>
+  <td><li>Description:
+	<td><input type="text" name="description"> </li>
+  <tr>
   <div>
-    <label for="startDate">Enter your Start Date (yyyy-mm-dd):</label>
-    <input type="date" id="startDate" name="startDate">
+    <td><label for="startDate">Enter your Start Date (yyyy-mm-dd):</label>
+    <td><input type="date" id="startDate" name="startDate">
   </div>
   <div>
-    <label for="endDate">Enter your End Date (yyyy-mm-dd):</label>
-    <input type="date" id="endDate" name="endDate">
+    <tr>
+    <td><label for="endDate">Enter your End Date (yyyy-mm-dd):</label>
+    <td><input type="date" id="endDate" name="endDate">
   </div>
-  <li>Target Capital for Project ($):
-  <input type="number" name="targetCapital"> </li>
-  <li>Current Capital in project ($):
-  <input type="number" name="currentCapital"> </li>
-  <li>Keywords for search (separate by comma e.g a,b,c):
-  <input type="text" name="keywords"> </li>
-
+  <tr>
+  <td><li>Target Capital for Project ($):
+  <td><input type="number" name="targetCapital"> </li>
+  <tr>
+  <td><li>Current Capital in project ($):
+  <td><input type="number" name="currentCapital"> </li>
+  <tr>
+  <td><li>Keywords for search (separate by comma e.g a,b,c):
+  <td><input type="text" name="keywords"> </li>
+</table>
 	<input type="submit" value="Create Project" name="submit" >
 	<input type="submit" value="Back to Profile" name="back_btn" >
 </form>
