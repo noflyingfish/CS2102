@@ -41,6 +41,10 @@
             echo "Password and confirm password does not match.<br/>";
         }
 
+        if(strlen($p1) < 7){
+            echo "Make sure password is at least 8 characters. <br/>";
+        } 
+
         if(strpos($email, '@') === false){
             echo "Please enter a valid email address!<br/>";
         } else{
