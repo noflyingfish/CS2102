@@ -59,13 +59,28 @@
                     
                     
                     echo "<form name='display' action='moderate.php' method='POST' >
-                    Title:<input type='text' name='new_title' value='$title'/>
-                    Description:<input type='text' name='new_description' value='$description'/>
-                    Current amount ($):<input type='text' name='new_curr' value='$curr'/>
-                    Amount seeking ($):<input type='text' name='new_total' value='$total'/>
-                    Start date:<input type='text' name='new_start' value='$start'/>
-                    End date:<input type='text' name='new_end' value='$end'/>
-                    Project keywords:<input type='text' name='new_keyword' value='$keywords'/>
+                    <table>
+                    <tr>
+                    <td>Title:
+                    <td><input type='text' name='new_title' value='$title'/>
+                    <tr>
+                    <td>Description:
+                    <td><input type='text' name='new_description' value='$description'/>
+                    <tr>
+                    <td>Current amount ($):
+                    <td><input type='text' name='new_curr' value='$curr'/>
+                    <tr>
+                    <td>Amount seeking ($):
+                    <td><input type='text' name='new_total' value='$total'/>
+                    <tr>
+                    <td>Start date:
+                    <td><input type='text' name='new_start' value='$start'/>
+                    <tr>
+                    <td>End date:
+                    <td><input type='text' name='new_end' value='$end'/>
+                    <tr>
+                    <td>Project keywords:
+                    <td><input type='text' name='new_keyword' value='$keywords'/>
                     <br>
                     <input type='submit' name='update' value='Update' />
                     <input type='submit' name='delete' value='Delete Project' />

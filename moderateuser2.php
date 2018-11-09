@@ -42,10 +42,16 @@
                   
                     
                     echo "<form name='display' action='moderateuser2.php' method='POST' >
-                    Name:<input type='text' name='new_name' value='$name'/>
-                    Email:<input type='text' name='new_email' value='$email'/>
-                    Password:<input type='text' name='new_password' value='$password'/>
-                  
+                    <table><tr>
+                    <td>Name:
+                    <td><input type='text' name='new_name' value='$name'/>
+                    <tr>
+                    <td>Email:
+                    <td><input type='text' name='new_email' value='$email'/>
+                    <tr>
+                    <td>Password:
+                    <td><input type='text' name='new_password' value='$password'/>
+                    </table>
                     <br>
                     <input type='submit' name='update' value='Update' />
                     <input type='submit' name='back' value='Back' />

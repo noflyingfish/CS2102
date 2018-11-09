@@ -9,15 +9,20 @@
 
 <h1>Crowd Funding</h1>
 <h2>User Profile</h2>
-	<div class="menu">
+
 	<form name="update" action="update.php" method="post">
-		New Password:<input type='text' name='new_password'/>
-		Retype Password:<input type='text' name='new_password2'/>
-		<br>
+	<table>
+		<tr>
+		<td>New Password:
+		<td><input type='text' name='new_password'/>
+		<tr>
+		<td>Retype Password:
+		<td><input type='text' name='new_password2'/>
+	</table>
 		<input type='submit' name='new' />
 		<input type="submit" value="go back to profile" name="back_btn" >
 	</form>
-	</div>
+	
 
 	<?php
 		//getting variable from another php
