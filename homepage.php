@@ -90,7 +90,9 @@
     if(isset($_POST['login'])){
 
       if($pw == "" || $uemail == ""){
-        echo "Please key in your login details";
+        echo "<script>
+          alert(\"Please key in your login details.\");
+          </script>";
       }else{
 
       $sql_is_admin = "SELECT admin FROM users WHERE email = '$uemail' AND password = '$pw'";
@@ -100,7 +102,9 @@
       $is_admin = $row[0];
 
         if($exist == 0){ // wrong pw/email
-          echo "Wrong Password or Email";
+          echo "<script>
+          alert(\"Wrong Password or Email\");
+          </script>";
         }else if($is_admin == 0){ //normal user
           header("Location: profile.php");
         }else if($is_admin == 1 ){ //admin user

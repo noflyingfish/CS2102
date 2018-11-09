@@ -47,7 +47,6 @@
 		        $type = $_POST['type'];
 
 		        if($check){
-
 		            if($type == "all"){
 		                $sql = "SELECT DISTINCT p.id, p.title AS Title, p.description AS Description, p.curr$, p.total$
 							    FROM project p, keywords k

@@ -52,9 +52,7 @@
       $curr = $_POST['currentCapital'];
       $keywords = $_POST['keywords'];
       $myArray = explode(',', $keywords);
-      //print_r($myArray);
       $create = true;
-
 
       //Validation for blank info
       if ($title == "" || $startDate == "" || $endDate == "" || $target == "" || $curr == "" || $keywords == "" || $description == "") {
@@ -63,8 +61,6 @@
       }
 
       //Add to database
-      //Task1: Please note that if admin attempts to create a project, an error will be raised because the 'own' column references users(email) in which the admin's email is not found. Multiple workarounds are possible.
-      //Task2: Also need to find a way to insert the many different keywords into the keywords table.
       if($create) {
         $sql_project = "INSERT INTO project (curr$, total$, title, description, start_date, end_date, own) VALUES('".$curr."', '".$target."', '".$title."', '".$description."', '".$startDate."', '".$endDate."', '".$user_email."') RETURNING id";
         $add_project = pg_query($db,$sql_project);

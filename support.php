@@ -93,12 +93,10 @@ error_reporting(E_ERROR | E_PARSE);
 			$result3 = pg_query($db,$sql3);
 			$col = pg_num_fields($result3);
 
-
 		   // Supporting first time
 			$sql2 = "INSERT INTO support (email, id, amt_supported) VALUES('".$email."', '".$id."', '".$amount."')";
 			//$result2 = pg_query($db, $sql2); // the result of the second query
 			$sql4 = "UPDATE support set amt_supported = amt_supported +$amount where id = '$id'";
-
 
 			//check to see if its first time supporting
 			if($col == 1){
