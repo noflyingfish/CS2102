@@ -9,11 +9,11 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!------ Include the above in your HEAD tag ---------->
+  <!-- Include the above in your HEAD tag -------->
 
 </head>
 
-<title>Login Page</title>
+<!-- <title>Login Page</title> -->
  <!--Made with love by Mutiullah Samim -->
 
 <!--Bootsrap 4 CDN-->
@@ -38,23 +38,21 @@
       </div>
     </div>
     <div class="card-body">
-      <form id="Login" name="display" method="POST">
+      <form name="display" method="POST">
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
           </div>
-          <input type="email" class="form-control" placeholder="Email Address">
+          <input type="text" name="email" class="form-control" placeholder="Email Address">
 
         </div>
         <div class="input-group form-group">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-key"></i></span>
           </div>
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password">
         </div>
-        <!-- <div class="row align-items-center remember">
-          <input type="checkbox">Remember Me
-        </div> -->
+
         <div class="form-group">
           <button type="login" name="login" class="btn float-right login_btn">Login</button>
         </div>
@@ -62,7 +60,7 @@
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-center links">
-        Don't have an account?<a href="creatuser.php">Sign Up</a>
+        Don't have an account?<a href="createuser.php">Sign Up</a>
       </div>
       <!-- <div class="d-flex justify-content-center">
         <a href="#">Forgot your password?</a>
@@ -71,40 +69,6 @@
   </div>
 </div>
 </div>
-<!-- <body id="LoginForm">
-
-  <div class="container-fluid">
-    <div class="row">
-        <img src="banner.jpg" alt="project banner" class="img-fluid" />
-    </div>
-  </div>
-
-  <h2>Welcome</h2>
-    <div class="container">
-    <h1 class="form-heading">login Form</h1>
-    <div class="login-form">
-    <div class="main-div">
-        <div class="panel">
-       <h2>Admin Login</h2>
-       <p>Please enter your email and password</p>
-       </div>
-        <form id="Login" name="display" method="POST">
-
-            <div class="form-group">
-                <input type="email" name ="email" class="form-control" id="inputEmail" placeholder="Email Address">
-            </div>
-
-            <div class="form-group">
-                <input type="password" name ="password" class="form-control" id="inputPassword" placeholder="Password">
-            </div>
-
-            <div class="forgot">
-              <button type="login" name="login" class="btn-sm btn-primary">Login</button>
-              <button type="signup" name="signup" class="btn-sm btn-primary align-right">Create an account</button>
-            </div>
-        </form>
-      </div>
-    </div></div></div> -->
 
   <?php
     session_start();
@@ -125,7 +89,7 @@
 
     if(isset($_POST['login'])){
 
-      if($uemail == "" || $pw == ""){
+      if($pw == "" || $uemail == ""){
         echo "Please key in your login details";
       }else{
 
