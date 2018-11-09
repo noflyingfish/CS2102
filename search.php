@@ -150,6 +150,7 @@
 		    //for admin use only
 		     if(isset($_POST['modify_btn'])){
 		        $_SESSION["id"] = $_POST['modify_btn'];//pass id into moderate page. moderate.php will now directly pull up the project with id $_SESSION["id"] for the admin to edit
+		        $_SESSION["from_location"] = "search.php";
 		        header("Location: moderate.php");
 		    }
 		?>
